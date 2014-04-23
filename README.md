@@ -29,6 +29,8 @@ th app of qinshuihepan(rewrite)
 * [ProgressWheel](https://github.com/Todd-Davies/ProgressWheel) 自定义各种进度条
 ，在[CustomLoading](https://github.com/stormzhang/CustomLoading)项目中也有收录!
 
+* [Picasso](https://github.com/square/picasso) A powerful image downloading and caching library for Android
+
 License
 ============
 
