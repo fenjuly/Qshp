@@ -72,8 +72,10 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="android-support-v4" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-19.0.0" level="project" />
+    <orderEntry type="library" exported="" name="picasso-2.2.0" level="project" />
     <orderEntry type="library" exported="" name="photoviewlibrary" level="project" />
     <orderEntry type="library" exported="" name="butterknife-4.0.1" level="project" />
+    <orderEntry type="library" exported="" name="jsoup-1.7.3" level="project" />
     <orderEntry type="library" exported="" name="support-v4-19.0.0" level="project" />
     <orderEntry type="library" exported="" name="listviewanimations-2.6.0" level="project" />
     <orderEntry type="library" exported="" name="volley" level="project" />
