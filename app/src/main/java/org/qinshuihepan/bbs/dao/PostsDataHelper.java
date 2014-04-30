@@ -13,10 +13,7 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.support.v4.content.CursorLoader;
 
-import org.qinshuihepan.bbs.dao.BaseDataHelper;
 import org.qinshuihepan.bbs.model.BasePost;
-import org.qinshuihepan.bbs.model.Post;
-import org.qinshuihepan.bbs.model.PostWithPic;
 import org.qinshuihepan.bbs.util.database.Column;
 import org.qinshuihepan.bbs.util.database.SQLiteTable;
 
@@ -42,7 +39,8 @@ public class PostsDataHelper extends BaseDataHelper {
         values.put(PostsDBInfo.TITLE, post.title);
         values.put(PostsDBInfo.CONTENT, post.content);
         values.put(PostsDBInfo.TIME, post.time);
-        values.put(PostsDBInfo.IMGURL, post.image);
+        values.put(PostsDBInfo.HAVEIMG, post.haveimg);
+        values.put(PostsDBInfo.COMMENT_COUNT, post.comment_count);
         return values;
     }
 
@@ -101,16 +99,22 @@ public class PostsDataHelper extends BaseDataHelper {
 
         public static final String TIME = "time";
 
-        public static final String IMGURL = "imgurl";
+        public static final String HAVEIMG = "haveimg";
+
+        public static final String COMMENT_COUNT = "comment_count";
+
 
         public static final SQLiteTable TABLE = new SQLiteTable(TABLE_NAME)
                 .addColumn(FID, Column.DataType.INTEGER)
                 .addColumn(TID, Column.DataType.INTEGER)
                 .addColumn(PID, Column.DataType.INTEGER)
                 .addColumn(TITLE, Column.DataType.TEXT)
-                .addColumn(CONTENT, Column.DataType.TEXT).addColumn(TIME, Column.DataType.TEXT)
-                .addColumn(IMGURL, Column.DataType.TEXT);
+                .addColumn(CONTENT, Column.DataType.TEXT)
+                .addColumn(TIME, Column.DataType.TEXT)
+                .addColumn(HAVEIMG, Column.DataType.INTEGER)
+                .addColumn(COMMENT_COUNT, Column.DataType.INTEGER);
     }
+
 
 }
 

@@ -1,8 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Qshp</string>
+    <string name="app_name">清水河畔</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+
+    <string name="loading">Loading...</string>
+    <string name="the_end">TheEnd</string>
+
+
+    <!-- Load -->
+
+    <string name="center_text">正在载入数据，请稍等</string>
+    <string name="bottom_text">newfenjuly@gmail.com</string>
+
+    <!-- MainForum head text -->
+    <string name="newestreply">最新回复</string>
+    <string name="newestpublish">最新发表</string>
+    <string name="todayhot">今日热门</string>
+    <string name="accountmanage">切换帐号</string>
+
+    <!-- Login EditText Hint -->
+    <string name="username">帐号</string>
+    <string name="password">密码</string>
+    <string name="confirm">登陆新账号</string>
+
+    <!-- The id of secondary forum -->
+    <string name="保研考研">199</string>
+    <string name="LaTeX技术交流">308</string>
+    <string name="聚焦两会">277</string>
+    <string name="镜头下的成电">307</string>
+    <string name="一周锐评">309</string>
+    <string name="名师博文">276</string>
+    <string name="大学生热点">275</string>
+    <string name="成电UED">310</string>
+    <string name="前端之美">258</string>
+    <string name="互联网资讯">271</string>
+    <string name="数字前端">272</string>
+    <string name="数学之美">266</string>
+    <string name="电脑FAQ">66</string>
+    <string name="硬件数码">108</string>
+    <string name="Unix_Linux">99</string>
+    <string name="程序员">70</string>
+    <string name="电子设计">121</string>
+    <string name="就业创业">174</string>
+    <string name="手机之家">224</string>
+    <string name="出国留学">219</string>
+    <string name="相约回家">225</string>
+    <string name="学习交流">20</string>
+    <string name="成电轨迹">109</string>
+    <string name="情感专区">45</string>
+    <string name="生活百科">31</string>
+    <string name="老乡会">17</string>
+    <string name="成电骑迹">244</string>
+    <string name="摄影艺术">55</string>
+    <string name="旅游专版">30</string>
+    <string name="动漫时代">140</string>
+    <string name="会心一笑">41</string>
+    <string name="影视天地">149</string>
+    <string name="游戏世界">191</string>
+    <string name="经典图吧">42</string>
+    <string name="娱乐花边">212</string>
+    <string name="体坛风云">204</string>
+    <string name="音乐空间">74</string>
+    <string name="情系舞缘">197</string>
+    <string name="校园新闻">257</string>
+    <string name="时政要闻">44</string>
+    <string name="社会百态">136</string>
+    <string name="科技教育">211</string>
+    <string name="军事国防">115</string>
+    <string name="经济相关">137</string>
+    <string name="二手专区">61</string>
+    <string name="店铺专区">111</string>
+    <string name="房屋租赁">255</string>
+    <string name="水手之家">25</string>
+    <string name="历史_文化_人物">181</string>
+    <string name="文人墨客">114</string>
+    <string name="我的大学生活">236</string>
+    <string name="毕业感言">237</string>
+    <string name="母校发展_我来献策">238</string>
+    <string name="站务公告">2</string>
+    <string name="站务综合">46</string>
+    <string name="影视资源">233</string>
+    <string name="体育资源">152</string>
+    <string name="动漫资源">128</string>
+    <string name="软件资源">252</string>
+    <string name="音乐资源">229</string>
 
 </resources>

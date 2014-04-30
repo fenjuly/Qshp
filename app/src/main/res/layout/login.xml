@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3594F2">
+
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/login_area"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/logo" />
+
+    <LinearLayout
+        android:id="@+id/login_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/input"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/username" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#FFFFFF"
+                android:id="@+id/username" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/input"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/password" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/password"
+                android:background="#FFFFFF"
+                android:password="true" />
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_marginLeft="40dip"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:background="#14439C"
+            android:text="登录"
+            android:textColor="#FFFFFF"
+            android:id="@+id/confirm" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

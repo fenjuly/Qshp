@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+
 /**
  * Created by liurongchan on 14-4-23.
  */
@@ -19,7 +20,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        PostsDataHelper.PostsDBInfo.TABLE.create(db);
+        ImagesDataHelper.ImagesDBInfo.TABLE.create(db);
     }
 
     @Override

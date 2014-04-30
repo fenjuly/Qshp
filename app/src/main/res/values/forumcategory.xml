@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="forumcategory">
+        <item>LaTeX技术交流 </item>
+        <item>镜头下的成电</item>
+        <item>一周锐评</item>
+        <item>名师博文</item>
+        <item>大学生热点</item>
+        <item>成电UED</item>
+        <item>前端之美</item>
+        <item>互联网资讯</item>
+        <item>数字前端</item>
+        <item>数学之美</item>
+        <item>电脑FAQ</item>
+        <item>硬件数码</item>
+        <item>Unix_Linux</item>
+        <item>程序员</item>
+        <item>电子设计</item>
+        <item>就业创业</item>
+        <item>手机之家</item>
+        <item>出国留学</item>
+        <item>相约回家</item>
+        <item>学习交流</item>
+        <item>成电轨迹</item>
+        <item>情感专区</item>
+        <item>生活百科</item>
+        <item>老乡会</item>
+        <item>成电骑迹</item>
+        <item>摄影艺术</item>
+        <item>旅游专版</item>
+        <item>动漫时代</item>
+        <item>会心一笑</item>
+        <item>影视天地</item>
+        <item>游戏世界</item>
+        <item>经典图吧</item>
+        <item>娱乐花边</item>
+        <item>体坛风云</item>
+        <item>音乐空间</item>
+        <item>情系舞缘</item>
+        <item>校园新闻</item>
+        <item>时政要闻</item>
+        <item>社会百态</item>
+        <item>科技教育</item>
+        <item>军事国防</item>
+        <item>经济相关</item>
+        <item>二手专区</item>
+        <item>店铺专区</item>
+        <item>房屋租赁</item>
+        <item>水手之家</item>
+        <item>历史_文化_人物</item>
+        <item>文人墨客</item>
+        <item>我的大学生活</item>
+        <item>毕业感言</item>
+        <item>母校发展_我来献策</item>
+        <item>站务公告</item>
+        <item>站务综合</item>
+        <item>影视资源</item>
+        <item>体育资源</item>
+        <item>动漫资源</item>
+        <item>软件资源</item>
+        <item>音乐资源</item>
+    </string-array>
+
+</resources>
