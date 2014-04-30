@@ -27,22 +27,30 @@ public class DataProvider extends ContentProvider {
 
     public static final String SCHEME = "content://";
 
-    public static final String PATH_FEEDS = "/posts";
+    public static final String PATH_POSTS = "/posts";
 
-    public static final Uri POSTS_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_FEEDS);
+    public static final Uri POSTS_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_POSTS);
 
     private static final int POSTS = 0;
 
+    public static final String PATH_IMAGES = "/posts";
+
+    public static final Uri IMAGES_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_POSTS);
+
+    private static final int IMAGES = 1;
     /*
     * MIME type definitions
     */
     public static final String POST_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.qingshuihepan.uestc.post";
+
+    public static final String IMAGE_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.qingshuihepan.uestc.image";
 
     private static final UriMatcher sUriMatcher;
 
     static {
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         sUriMatcher.addURI(AUTHORITY, "posts", POSTS);
+        sUriMatcher.addURI(AUTHORITY, "images", IMAGES);
     }
 
     private static DBHelper mDBHelper;
@@ -77,7 +85,6 @@ public class DataProvider extends ContentProvider {
                     null, // don't filter by row groups
                     sortOrder // The sort order
             );
-
             cursor.setNotificationUri(getContext().getContentResolver(), uri);
             return cursor;
         }
@@ -88,6 +95,8 @@ public class DataProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
             case POSTS:
                 return POST_CONTENT_TYPE;
+            case IMAGES:
+                return IMAGE_CONTENT_TYPE;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
@@ -157,7 +166,16 @@ public class DataProvider extends ContentProvider {
 
     private String matchTable(Uri uri) {
         String table = null;
-       //need to implements
+        switch (sUriMatcher.match(uri)) {
+            case POSTS:
+                table = PostsDataHelper.PostsDBInfo.TABLE_NAME;
+                break;
+            case IMAGES:
+                table = ImagesDataHelper.ImagesDBInfo.TABLE_NAME;
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown URI " + uri);
+        }
         return table;
     }
 }

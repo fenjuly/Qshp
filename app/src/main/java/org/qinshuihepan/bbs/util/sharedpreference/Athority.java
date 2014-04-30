@@ -26,30 +26,33 @@ public class Athority {
     }
 
     public static void addCookies(Map<String, String> cookies) {
-        if (mShared != null) {
-            SharedPreferences.Editor editor = mShared.edit();
-            Iterator<String> iterator = cookies.keySet().iterator();
-            while (iterator.hasNext()) {
-                String key = iterator.next();
-                editor.putString(key, cookies.get(key));
-            }
-            editor.apply();
+        if (mShared == null) {
+            getSharedPreference();
         }
+        SharedPreferences.Editor editor = mShared.edit();
+        Iterator<String> iterator = cookies.keySet().iterator();
+        while (iterator.hasNext()) {
+            String key = iterator.next();
+            editor.putString(key, cookies.get(key));
+        }
+        editor.apply();
     }
 
     public static void addOther(String key, String value) {
-        if (mShared != null) {
-            SharedPreferences.Editor editor = mShared.edit();
-            editor.putString(key, value);
-            editor.apply();
+        if (mShared == null) {
+            getSharedPreference();
         }
+        SharedPreferences.Editor editor = mShared.edit();
+        editor.putString(key, value);
+        editor.apply();
     }
 
     public String getInformation(String key) {
         String information = "";
-        if (mShared != null) {
-            information = mShared.getString(key, "no");
+        if (mShared == null) {
+            getSharedPreference();
         }
+        information = mShared.getString(key, "no");
         return information;
     }
 

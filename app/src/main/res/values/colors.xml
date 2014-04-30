@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="drawer_bg">#FFFFFFcc</color>
+    <color name="main_bg">#14439C</color>
+    <color name="login_bg">#3594F2</color>
+</resources>

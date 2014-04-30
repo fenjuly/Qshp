@@ -1,10 +1,34 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="org.qinshuihepan.MainActivity" >
-    
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/myposts"
+        android:title="我的帖子"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
+    <item
+        android:id="@+id/myrelpy"
+        android:title="我的回复"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+    <item
+        android:id="@+id/setting"
+        android:title="个性设置"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+    <item
+        android:id="@+id/profile"
+        android:title="个反馈意见"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+    <item
+        android:id="@+id/search"
+        android:title="搜索帖子"
+        android:icon="@drawable/u11"
+        android:showAsAction="always" />
+
+    <item
+        android:id="@+id/new_post"
+        android:title="发表帖子"
+        android:icon="@drawable/u13"
+        android:showAsAction="always" />
 </menu>

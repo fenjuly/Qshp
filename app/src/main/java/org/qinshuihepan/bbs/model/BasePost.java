@@ -5,21 +5,81 @@ import android.database.Cursor;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.qinshuihepan.bbs.App;
+import org.qinshuihepan.bbs.dao.ImagesDataHelper;
+import org.qinshuihepan.bbs.dao.PostsDataHelper;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Created by liurongchan on 14-4-23.
  */
-public  abstract class BasePost {
+public class BasePost {
+    public static final HashMap<Integer, BasePost> CACHE = new HashMap<Integer, BasePost>();
 
+    public static final int NOIMG = 0;
+    public static final int YESIMG = 1;
 
-    public abstract View newView(Context context, Cursor cursor, ViewGroup viewGroup);
+    private static ImagesDataHelper miDataHelper = new ImagesDataHelper(App.getContext());
 
-    public abstract BasePost getItem(int position);
+    public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
+        return null;
+    }
 
-    public abstract void bindView(View view, Context context, Cursor cursor);
+    public BasePost getItem(int position) {
+        return null;
+    }
 
-    public abstract BasePost fromCursor(Cursor cursor);
+    public void bindView(View view, Context context, Cursor cursor) {
+    }
+
+    public static void addToCache(BasePost post) {
+        CACHE.put(post.tid, post);
+    }
+
+    public static BasePost getFromCache(int tid) {
+        return CACHE.get(tid);
+    }
+
+    public static BasePost fromCursor(Cursor cursor) {
+        int tid = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.TID));
+        BasePost post = getFromCache(tid);
+        if (post != null) {
+            return post;
+        }
+
+        int fid = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.FID));
+        int pid = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.PID));
+        String title = cursor.getString(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.TITLE));
+        String content = cursor.getString(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.CONTENT));
+        String time = cursor.getString(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.TIME));
+        int haveimg = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.HAVEIMG));
+        int comment_count = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.COMMENT_COUNT));
+
+        ArrayList<Image> images = null;
+        if (haveimg == NOIMG) {
+            post = new Post(fid, tid, pid, title, content, time, haveimg, comment_count, images);
+        } else {
+
+            images = miDataHelper.queryImages(tid);
+            post = new PostWithPic(fid, tid, pid, title, content, time, haveimg, comment_count, images);
+        }
+        addToCache(post);
+        return post;
+    }
+
+    public BasePost(int fid, int tid, int pid, String title, String content, String time, int haveimg, int comment_count, ArrayList<Image> images) {
+        this.fid = fid;
+        this.tid = tid;
+        this.pid = pid;
+        this.title = title;
+        this.content = content;
+        this.time = time;
+        this.haveimg = haveimg;
+        this.comment_count = comment_count;
+        this.images = images;
+    }
 
     public int fid;
     public int tid;
@@ -27,5 +87,7 @@ public  abstract class BasePost {
     public String title;
     public String content;
     public String time;
-    public  String image;
+    public int haveimg;
+    public int comment_count;
+    public ArrayList<Image> images;
 }
