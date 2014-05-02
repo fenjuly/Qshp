@@ -125,6 +125,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
         });
     }
 
+
     private void loadData(final int next) {
         if (!mSwipeLayout.isRefreshing() && (0 == next)) {
             mSwipeLayout.setRefreshing(true);
@@ -137,64 +138,6 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                     ArrayList<BasePost> posts = new ArrayList<BasePost>();
                     Document doc = null;
                     mpDataHelper.deleteAll();
-<<<<<<< HEAD
-                }
-                try {
-                    Connection.Response response = Request.execute(String.format(Api.POSTS, App.getContext().getResources().getString(Integer.valueOf(Utils.FORUM_CATEGORY_ID.get(mCategory))), next), "Mozilla", (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
-                    System.out.println(String.format(Api.POSTS, App.getContext().getResources().getString(Integer.valueOf(Utils.FORUM_CATEGORY_ID.get(mCategory))), next));
-                    doc = response.parse();
-                    Elements tbodies = doc.getElementsByTag("tbody");
-                    String str_tid = "";
-                    String title = "";
-                    String time = "";
-                    String comment_count = "";
-                    int haveimg = 0;
-                    int tid = 0;
-                    String author = "";
-                    BasePost post;
-                    for (Element tbody : tbodies) {
-
-                        str_tid = tbody.id();
-
-                        if (str_tid.equals("")) {
-                            continue;
-                        } else if (str_tid.startsWith("stickthread_")) {
-                            tid = Integer.valueOf(str_tid.substring("stickthread_"
-                                    .length()));
-                        } else if (str_tid.startsWith("normalthread_")) {
-                            tid = Integer.valueOf(str_tid.substring("normalthread_"
-                                    .length()));
-                        } else if (str_tid.equals("separatorline")) {
-                            continue;
-                        }
-                        Elements titles = tbody.select("a.s.xst");
-                        title = titles.text();
-                        Elements bys = tbody.getElementsByClass("by");
-                        for (Element by : bys) {
-                            author = by.getElementsByTag("a").text();
-                            System.out.println(author);
-                            Elements spans = by.getElementsByTag("span");
-                            for (Element span : spans) {
-                                time = span.getElementsByTag("span").text();
-                            }
-                            break;
-                        }
-                        Elements nums = tbody.getElementsByClass("num");
-                        for (Element num : nums) {
-                            comment_count = num.getElementsByTag("a").text();
-                            if (!isNumeric(comment_count))
-                                comment_count = "0";
-                        }
-                        Elements imgs = tbody.getElementsByTag("img");
-                        if (imgs.size() > 1) {
-                            haveimg = 1;
-                            post = new PostWithPic(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), author, null);
-                        } else {
-                            haveimg = 0;
-                            post = new Post(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), author, null);
-                        }
-                        posts.add(post);
-=======
                     try {
                         Connection.Response response = Request.execute(Api.HOST, "Mozilla", (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
                         System.out.println(Api.HOST);
@@ -206,6 +149,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                         String comment_count = "";
                         int haveimg = 0;
                         int tid = 0;
+                        String author = "";
                         BasePost post;
                         switch (tempCategoryID) {
                             case 10001:
@@ -225,7 +169,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                                 .getElementsByTag("li")) {
                             tid = Integer.valueOf(portalBlockContent.select("a[title]").attr("href").substring(52));
                             title = portalBlockContent.select("a[title]").attr("title");
-                            post = new Post(0, tid, 0, title, "", "", haveimg, 0, null);
+                            post = new Post(0, tid, 0, title, "", "", haveimg, 0, author, null);
                             posts.add(post);
                         }
                         mpDataHelper.bulkInsert(posts);
@@ -267,6 +211,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                         String comment_count = "";
                         int haveimg = 0;
                         int tid = 0;
+                        String author = "";
                         BasePost post;
                         for (Element tbody : tbodies) {
 
@@ -287,6 +232,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                             title = titles.text();
                             Elements bys = tbody.getElementsByClass("by");
                             for (Element by : bys) {
+                                author = by.getElementsByTag("a").text();
                                 Elements spans = by.getElementsByTag("span");
                                 for (Element span : spans) {
                                     time = span.getElementsByTag("span").text();
@@ -296,22 +242,24 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                             Elements nums = tbody.getElementsByClass("num");
                             for (Element num : nums) {
                                 comment_count = num.getElementsByTag("a").text();
+                                if (!isNumeric(comment_count)) {
+                                    comment_count = "0";
+                                }
                             }
                             Elements imgs = tbody.getElementsByTag("img");
                             if (imgs.size() > 1) {
                                 haveimg = 1;
-                                post = new PostWithPic(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), null);
+                                post = new PostWithPic(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), author, null);
                             } else {
                                 haveimg = 0;
-                                post = new Post(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), null);
+                                post = new Post(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), author, null);
                             }
-                            System.out.println(haveimg);
+                            System.out.println(author);
                             posts.add(post);
                         }
                         mpDataHelper.bulkInsert(posts);
                     } catch (IOException e) {
                         e.printStackTrace();
->>>>>>> d359f9cc4a0016b3b168de2b657d33651b74c1b1
                     }
                     return isRefreshFromTop;
                 }
@@ -329,6 +277,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
             });
         }
     }
+
 
     private void loadFirst() {
         mPage = 1;
