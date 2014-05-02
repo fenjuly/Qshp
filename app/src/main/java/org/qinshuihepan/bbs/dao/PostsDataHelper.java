@@ -41,6 +41,7 @@ public class PostsDataHelper extends BaseDataHelper {
         values.put(PostsDBInfo.TIME, post.time);
         values.put(PostsDBInfo.HAVEIMG, post.haveimg);
         values.put(PostsDBInfo.COMMENT_COUNT, post.comment_count);
+        values.put(PostsDBInfo.AUTHOR, post.author);
         return values;
     }
 
@@ -103,6 +104,8 @@ public class PostsDataHelper extends BaseDataHelper {
 
         public static final String COMMENT_COUNT = "comment_count";
 
+        public static final String AUTHOR = "author";
+
 
         public static final SQLiteTable TABLE = new SQLiteTable(TABLE_NAME)
                 .addColumn(FID, Column.DataType.INTEGER)
@@ -112,7 +115,8 @@ public class PostsDataHelper extends BaseDataHelper {
                 .addColumn(CONTENT, Column.DataType.TEXT)
                 .addColumn(TIME, Column.DataType.TEXT)
                 .addColumn(HAVEIMG, Column.DataType.INTEGER)
-                .addColumn(COMMENT_COUNT, Column.DataType.INTEGER);
+                .addColumn(COMMENT_COUNT, Column.DataType.INTEGER)
+                .addColumn(AUTHOR, Column.DataType.TEXT);
     }
 
 

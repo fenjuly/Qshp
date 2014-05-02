@@ -12,8 +12,8 @@ import java.util.ArrayList;
  */
 public class PostWithPic extends BasePost implements ListItem {
 
-    public PostWithPic(int fid, int tid, int pid, String title, String content, String time, int haveimg, int comment_count, ArrayList<Image> images) {
-        super(fid, tid, pid, title, content, time, haveimg, comment_count, images);
+    public PostWithPic(int fid, int tid, int pid, String title, String content, String time, int haveimg, int comment_count, String author, ArrayList<Image> images) {
+        super(fid, tid, pid, title, content, time, haveimg, comment_count, author, images);
     }
 
     @Override

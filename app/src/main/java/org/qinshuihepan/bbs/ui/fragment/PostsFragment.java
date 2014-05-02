@@ -149,6 +149,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                     String comment_count = "";
                     int haveimg = 0;
                     int tid = 0;
+                    String author = "";
                     BasePost post;
                     for (Element tbody : tbodies) {
 
@@ -169,6 +170,8 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                         title = titles.text();
                         Elements bys = tbody.getElementsByClass("by");
                         for (Element by : bys) {
+                            author = by.getElementsByTag("a").text();
+                            System.out.println(author);
                             Elements spans = by.getElementsByTag("span");
                             for (Element span : spans) {
                                 time = span.getElementsByTag("span").text();
@@ -178,16 +181,17 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                         Elements nums = tbody.getElementsByClass("num");
                         for (Element num : nums) {
                             comment_count = num.getElementsByTag("a").text();
+                            if (!isNumeric(comment_count))
+                                comment_count = "0";
                         }
                         Elements imgs = tbody.getElementsByTag("img");
                         if (imgs.size() > 1) {
                             haveimg = 1;
-                            post = new PostWithPic(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), null);
+                            post = new PostWithPic(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), author, null);
                         } else {
                             haveimg = 0;
-                            post = new Post(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), null);
+                            post = new Post(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), author, null);
                         }
-                        System.out.println(haveimg);
                         posts.add(post);
                     }
                     mpDataHelper.bulkInsert(posts);
@@ -246,5 +250,15 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
     @Override
     public void onRefresh() {
         loadFirst();
+    }
+
+
+    private static boolean isNumeric(String str) {
+        for (int i = str.length(); --i >= 0; ) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 }

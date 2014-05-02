@@ -56,20 +56,21 @@ public class BasePost {
         String time = cursor.getString(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.TIME));
         int haveimg = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.HAVEIMG));
         int comment_count = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.COMMENT_COUNT));
+        String author = cursor.getString(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.AUTHOR));
 
         ArrayList<Image> images = null;
         if (haveimg == NOIMG) {
-            post = new Post(fid, tid, pid, title, content, time, haveimg, comment_count, images);
+            post = new Post(fid, tid, pid, title, content, time, haveimg, comment_count, author, images);
         } else {
 
             images = miDataHelper.queryImages(tid);
-            post = new PostWithPic(fid, tid, pid, title, content, time, haveimg, comment_count, images);
+            post = new PostWithPic(fid, tid, pid, title, content, time, haveimg, comment_count, author, images);
         }
         addToCache(post);
         return post;
     }
 
-    public BasePost(int fid, int tid, int pid, String title, String content, String time, int haveimg, int comment_count, ArrayList<Image> images) {
+    public BasePost(int fid, int tid, int pid, String title, String content, String time, int haveimg, int comment_count, String author, ArrayList<Image> images) {
         this.fid = fid;
         this.tid = tid;
         this.pid = pid;
@@ -78,6 +79,7 @@ public class BasePost {
         this.time = time;
         this.haveimg = haveimg;
         this.comment_count = comment_count;
+        this.author = author;
         this.images = images;
     }
 
@@ -89,5 +91,6 @@ public class BasePost {
     public String time;
     public int haveimg;
     public int comment_count;
+    public String author;
     public ArrayList<Image> images;
 }
