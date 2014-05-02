@@ -15,6 +15,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 public class App extends Application {
     private static Context sContext;
 
+
     @Override
     public void onCreate() {
         super.onCreate();

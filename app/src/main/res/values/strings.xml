@@ -91,4 +91,8 @@
     <string name="软件资源">252</string>
     <string name="音乐资源">229</string>
 
+    <string name="最新回复">10001</string>
+    <string name="最新发表">10002</string>
+    <string name="今日热门">10003</string>
+
 </resources>

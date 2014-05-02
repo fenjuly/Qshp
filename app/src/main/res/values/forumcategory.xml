@@ -60,6 +60,10 @@
         <item>动漫资源</item>
         <item>软件资源</item>
         <item>音乐资源</item>
+
+        <item>最新回复</item>
+        <item>最新发表</item>
+        <item>今日热门</item>
     </string-array>
 
 </resources>
