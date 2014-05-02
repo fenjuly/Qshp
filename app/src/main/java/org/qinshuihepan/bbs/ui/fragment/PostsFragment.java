@@ -129,85 +129,146 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
         if (!mSwipeLayout.isRefreshing() && (0 == next)) {
             mSwipeLayout.setRefreshing(true);
         }
-        TaskUtils.executeAsyncTask(new AsyncTask<String, Void, Boolean>() {
-            @Override
-            protected Boolean doInBackground(String... params) {
-                boolean isRefreshFromTop = (1 == mPage);
-                ArrayList<BasePost> posts = new ArrayList<BasePost>();
-                Document doc = null;
-                if (isRefreshFromTop) {
+        final Integer tempCategoryID = Integer.valueOf(App.getContext().getResources().getString(Integer.valueOf(Utils.FORUM_CATEGORY_ID.get(mCategory))));
+        if (tempCategoryID.equals(10001) || tempCategoryID.equals(10002) || tempCategoryID.equals(10003)) {
+            TaskUtils.executeAsyncTask(new AsyncTask<String, Void, Boolean>() {
+                @Override
+                protected Boolean doInBackground(String... params) {
+                    ArrayList<BasePost> posts = new ArrayList<BasePost>();
+                    Document doc = null;
                     mpDataHelper.deleteAll();
-                }
-                try {
-                    Connection.Response response = Request.execute(String.format(Api.POSTS, App.getContext().getResources().getString(Integer.valueOf(Utils.FORUM_CATEGORY_ID.get(mCategory))), next), "Mozilla", (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
-                    System.out.println(String.format(Api.POSTS, App.getContext().getResources().getString(Integer.valueOf(Utils.FORUM_CATEGORY_ID.get(mCategory))), next));
-                    doc = response.parse();
-                    Elements tbodies = doc.getElementsByTag("tbody");
-                    String str_tid = "";
-                    String title = "";
-                    String time = "";
-                    String comment_count = "";
-                    int haveimg = 0;
-                    int tid = 0;
-                    BasePost post;
-                    for (Element tbody : tbodies) {
-
-                        str_tid = tbody.id();
-
-                        if (str_tid.equals("")) {
-                            continue;
-                        } else if (str_tid.startsWith("stickthread_")) {
-                            tid = Integer.valueOf(str_tid.substring("stickthread_"
-                                    .length()));
-                        } else if (str_tid.startsWith("normalthread_")) {
-                            tid = Integer.valueOf(str_tid.substring("normalthread_"
-                                    .length()));
-                        } else if (str_tid.equals("separatorline")) {
-                            continue;
+                    try {
+                        Connection.Response response = Request.execute(Api.HOST, "Mozilla", (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
+                        System.out.println(Api.HOST);
+                        System.out.println(mCategory + tempCategoryID);
+                        doc = response.parse();
+                        Element portalBlockContents = null;
+                        String title = "";
+                        String time = "";
+                        String comment_count = "";
+                        int haveimg = 0;
+                        int tid = 0;
+                        BasePost post;
+                        switch (tempCategoryID) {
+                            case 10001:
+                                portalBlockContents = doc
+                                        .getElementById("portal_block_21_content");
+                                break;
+                            case 10002:
+                                portalBlockContents = doc
+                                        .getElementById("portal_block_20_content");
+                                break;
+                            case 10003:
+                                portalBlockContents = doc
+                                        .getElementById("portal_block_22_content");
+                                break;
                         }
-                        Elements titles = tbody.select("a.s.xst");
-                        title = titles.text();
-                        Elements bys = tbody.getElementsByClass("by");
-                        for (Element by : bys) {
-                            Elements spans = by.getElementsByTag("span");
-                            for (Element span : spans) {
-                                time = span.getElementsByTag("span").text();
-                            }
-                            break;
+                        for (Element portalBlockContent : portalBlockContents
+                                .getElementsByTag("li")) {
+                            tid = Integer.valueOf(portalBlockContent.select("a[title]").attr("href").substring(52));
+                            title = portalBlockContent.select("a[title]").attr("title");
+                            post = new Post(0, tid, 0, title, "", "", haveimg, 0, null);
+                            posts.add(post);
                         }
-                        Elements nums = tbody.getElementsByClass("num");
-                        for (Element num : nums) {
-                            comment_count = num.getElementsByTag("a").text();
-                        }
-                        Elements imgs = tbody.getElementsByTag("img");
-                        if (imgs.size() > 1) {
-                            haveimg = 1;
-                            post = new PostWithPic(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), null);
-                        } else {
-                            haveimg = 0;
-                            post = new Post(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), null);
-                        }
-                        System.out.println(haveimg);
-                        posts.add(post);
+                        mpDataHelper.bulkInsert(posts);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                    mpDataHelper.bulkInsert(posts);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    return true;
                 }
-                return isRefreshFromTop;
-            }
 
-            @Override
-            protected void onPostExecute(Boolean isRefreshFromTop) {
-                super.onPostExecute(isRefreshFromTop);
-                if (isRefreshFromTop) {
-                    mSwipeLayout.setRefreshing(false);
-                } else {
-                    mListView.setState(LoadingFooter.State.Idle, 3000);
+                @Override
+                protected void onPostExecute(Boolean isRefreshFromTop) {
+                    super.onPostExecute(isRefreshFromTop);
+                    if (isRefreshFromTop) {
+                        mSwipeLayout.setRefreshing(false);
+                    } else {
+                        mListView.setState(LoadingFooter.State.Idle, 3000);
+                    }
+                    getLoaderManager().restartLoader(0, null, PostsFragment.this);
                 }
-                getLoaderManager().restartLoader(0, null, PostsFragment.this);
-            }
-        });
+            });
+        } else {
+            TaskUtils.executeAsyncTask(new AsyncTask<String, Void, Boolean>() {
+                @Override
+                protected Boolean doInBackground(String... params) {
+                    boolean isRefreshFromTop = (1 == mPage);
+                    ArrayList<BasePost> posts = new ArrayList<BasePost>();
+                    Document doc = null;
+                    if (isRefreshFromTop) {
+                        mpDataHelper.deleteAll();
+                    }
+                    try {
+                        Connection.Response response = Request.execute(String.format(Api.POSTS, App.getContext().getResources().getString(Integer.valueOf(Utils.FORUM_CATEGORY_ID.get(mCategory))), next), "Mozilla", (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
+                        System.out.println(String.format(Api.POSTS, App.getContext().getResources().getString(Integer.valueOf(Utils.FORUM_CATEGORY_ID.get(mCategory))), next));
+                        doc = response.parse();
+                        Elements tbodies = doc.getElementsByTag("tbody");
+                        String str_tid = "";
+                        String title = "";
+                        String time = "";
+                        String comment_count = "";
+                        int haveimg = 0;
+                        int tid = 0;
+                        BasePost post;
+                        for (Element tbody : tbodies) {
+
+                            str_tid = tbody.id();
+
+                            if (str_tid.equals("")) {
+                                continue;
+                            } else if (str_tid.startsWith("stickthread_")) {
+                                tid = Integer.valueOf(str_tid.substring("stickthread_"
+                                        .length()));
+                            } else if (str_tid.startsWith("normalthread_")) {
+                                tid = Integer.valueOf(str_tid.substring("normalthread_"
+                                        .length()));
+                            } else if (str_tid.equals("separatorline")) {
+                                continue;
+                            }
+                            Elements titles = tbody.select("a.s.xst");
+                            title = titles.text();
+                            Elements bys = tbody.getElementsByClass("by");
+                            for (Element by : bys) {
+                                Elements spans = by.getElementsByTag("span");
+                                for (Element span : spans) {
+                                    time = span.getElementsByTag("span").text();
+                                }
+                                break;
+                            }
+                            Elements nums = tbody.getElementsByClass("num");
+                            for (Element num : nums) {
+                                comment_count = num.getElementsByTag("a").text();
+                            }
+                            Elements imgs = tbody.getElementsByTag("img");
+                            if (imgs.size() > 1) {
+                                haveimg = 1;
+                                post = new PostWithPic(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), null);
+                            } else {
+                                haveimg = 0;
+                                post = new Post(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), null);
+                            }
+                            System.out.println(haveimg);
+                            posts.add(post);
+                        }
+                        mpDataHelper.bulkInsert(posts);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return isRefreshFromTop;
+                }
+
+                @Override
+                protected void onPostExecute(Boolean isRefreshFromTop) {
+                    super.onPostExecute(isRefreshFromTop);
+                    if (isRefreshFromTop) {
+                        mSwipeLayout.setRefreshing(false);
+                    } else {
+                        mListView.setState(LoadingFooter.State.Idle, 3000);
+                    }
+                    getLoaderManager().restartLoader(0, null, PostsFragment.this);
+                }
+            });
+        }
     }
 
     private void loadFirst() {

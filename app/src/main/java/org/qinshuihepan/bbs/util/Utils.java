@@ -20,6 +20,10 @@ public class Utils {
         private static final long serialVersionUID = 1410556396714226136L;
 
         {
+            put("最新回复", R.string.最新回复);
+            put("最新发表", R.string.最新发表);
+            put("今日热门", R.string.今日热门);
+
             put("保研考研", R.string.保研考研);
             put("LaTeX技术交流", R.string.LaTeX技术交流);
             put("聚焦两会", R.string.聚焦两会);
