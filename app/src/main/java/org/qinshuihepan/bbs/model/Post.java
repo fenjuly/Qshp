@@ -4,8 +4,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import org.qinshuihepan.bbs.R;
 
 import java.util.ArrayList;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * Created by liurongchan on 14-4-23.
@@ -26,10 +33,16 @@ public class Post extends BasePost implements ListItem {
         return null;
     }
 
-    @Override
-    public void bindView(View view, Context context, Cursor cursor) {
+    public static void bindView(View view, Context context, Cursor cursor) {
+        System.out.println("postbindview");
+        Holder holder = getHolder(view);
+
+        BasePost post = BasePost.fromCursor(cursor, ITEM);
+
+        holder.author.setText(post.author);
+        holder.content.setText(post.content);
+        holder.time.setText(post.time);
 
     }
-
 
 }

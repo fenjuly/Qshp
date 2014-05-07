@@ -10,7 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.nhaarman.listviewanimations.swinginadapters.AnimationAdapter;
 
@@ -21,7 +21,6 @@ import org.jsoup.select.Elements;
 import org.qinshuihepan.bbs.App;
 import org.qinshuihepan.bbs.R;
 import org.qinshuihepan.bbs.api.Api;
-import org.qinshuihepan.bbs.dao.ImagesDataHelper;
 import org.qinshuihepan.bbs.dao.PostsDataHelper;
 import org.qinshuihepan.bbs.data.Request;
 import org.qinshuihepan.bbs.model.BasePost;
@@ -59,9 +58,11 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
 
     private String mCategory;
     private PostsDataHelper mpDataHelper;
-    private ImagesDataHelper miDataHelper;
     private PostsAdapter mAdapter;
     private int mPage = 1;
+    private int maxPage;
+    private boolean isloadmaxpage = false;
+
 
     public static PostsFragment newInstance(String category) {
         PostsFragment fragment = new PostsFragment();
@@ -77,7 +78,6 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
         ButterKnife.inject(this, contentView);
         parseArgument();
         mpDataHelper = new PostsDataHelper(getActivity());
-        miDataHelper = new ImagesDataHelper(getActivity());
         mAdapter = new PostsAdapter(getActivity(), mListView);
         View header = new View(getActivity());
         mListView.addHeaderView(header);
@@ -87,14 +87,11 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
         mListView.setLoadNextListener(new PageListView.OnLoadNextListener() {
             @Override
             public void onLoadNext() {
-                loadNext();
-            }
-        });
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                if (mPage >= maxPage) {
+                    Toast.makeText(getActivity(), "已經滑到底啦！", Toast.LENGTH_SHORT).show();
+                } else {
+                    loadNext();
+                }
             }
         });
 
@@ -169,7 +166,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                                 .getElementsByTag("li")) {
                             tid = Integer.valueOf(portalBlockContent.select("a[title]").attr("href").substring(52));
                             title = portalBlockContent.select("a[title]").attr("title");
-                            post = new Post(0, tid, 0, title, "", "", haveimg, 0, author, null);
+                            post = new Post(tempCategoryID, tid, 0, title, "", "", haveimg, 0, author, null);
                             posts.add(post);
                         }
                         mpDataHelper.bulkInsert(posts);
@@ -246,17 +243,44 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                                     comment_count = "0";
                                 }
                             }
-                            Elements imgs = tbody.getElementsByTag("img");
-                            if (imgs.size() > 1) {
-                                haveimg = 1;
-                                post = new PostWithPic(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), author, null);
-                            } else {
-                                haveimg = 0;
-                                post = new Post(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), author, null);
-                            }
-                            System.out.println(author);
+
+                            post = new Post(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), author, null);
                             posts.add(post);
                         }
+
+                        if (!isloadmaxpage) {
+                            Element fd_page_bottom = doc.getElementById("fd_page_top");
+                            if (fd_page_bottom.getElementsByTag("strong").text()
+                                    .equals("")) {
+                                maxPage = 1;
+                                mPage = 1;
+                            } else {
+                                maxPage = Integer.valueOf(fd_page_bottom
+                                        .getElementsByTag("strong").text());
+                                mPage = maxPage;
+                                Elements page_numbers = fd_page_bottom
+                                        .getElementsByTag("a");
+                                int now_number = 1;
+                                String str_now_number = "";
+                                for (Element page_number : page_numbers) {
+                                    str_now_number = page_number.text();
+                                    if (str_now_number.startsWith("... ")) {
+                                        now_number = Integer.valueOf(str_now_number
+                                                .substring("... ".length()));
+                                    } else if (str_now_number.equals("下一页")) {
+                                        continue;
+                                    } else {
+                                        now_number = Integer.valueOf(str_now_number);
+                                    }
+                                    if (now_number > maxPage) {
+                                        maxPage = now_number;
+                                    }
+                                }
+                                isloadmaxpage = true;
+                            }
+                        }
+
+
                         mpDataHelper.bulkInsert(posts);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -272,7 +296,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                     } else {
                         mListView.setState(LoadingFooter.State.Idle, 3000);
                     }
-                    getLoaderManager().restartLoader(0, null, PostsFragment.this);
+//                    getLoaderManager().restartLoader(0, null, PostsFragment.this);
                 }
             });
         }
@@ -302,9 +326,9 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mAdapter.changeCursor(data);
-//        if (data != null && data.getCount() == 0) {
-//            loadFirst();
-//        }
+        if (data != null && data.getCount() == 0) {
+            loadFirst();
+        }
     }
 
     @Override
@@ -312,11 +336,17 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
         mAdapter.changeCursor(null);
     }
 
+
     @Override
     public void onRefresh() {
         loadFirst();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getLoaderManager().restartLoader(0, null, this);
+    }
 
     private static boolean isNumeric(String str) {
         for (int i = str.length(); --i >= 0; ) {
@@ -326,4 +356,6 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
         }
         return true;
     }
+
+
 }

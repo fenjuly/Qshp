@@ -30,16 +30,16 @@ public class ImagesDataHelper extends BaseDataHelper {
 
     private ContentValues getContentValues(Image image) {
         ContentValues values = new ContentValues();
-        values.put(ImagesDBInfo.TID, image.tid);
+        values.put(ImagesDBInfo.PID, image.pid);
         values.put(ImagesDBInfo.URL, image.url);
         return values;
     }
 
-    public Image query(long tid) {
+    public Image query(long pid) {
         Image image = null;
-        Cursor cursor = query(null, ImagesDBInfo.TID + "=?",
+        Cursor cursor = query(null, ImagesDBInfo.PID + "=?",
                 new String[]{
-                        String.valueOf(tid)
+                        String.valueOf(pid)
                 }, null
         );
         if (cursor.moveToFirst()) {
@@ -50,16 +50,17 @@ public class ImagesDataHelper extends BaseDataHelper {
     }
 
 
-    public ArrayList<Image> queryImages(long tid) {
+    public ArrayList<Image> queryImages(long pid) {
         ArrayList<Image> images = null;
-        Cursor cursor = query(null, ImagesDBInfo.TID + "=?",
+        Cursor cursor = query(null, ImagesDBInfo.PID + "=?",
                 new String[]{
-                        String.valueOf(tid)
+                        String.valueOf(pid)
                 }, null
         );
         if (cursor.moveToFirst()) {
             images = Image.listfromCursor(cursor);
         }
+        System.out.println(cursor.getCount());
         cursor.close();
         return images;
     }
@@ -93,12 +94,12 @@ public class ImagesDataHelper extends BaseDataHelper {
 
         public static final String TABLE_NAME = "images";
 
-        public static final String TID = "tid";
+        public static final String PID = "pid";
 
         public static final String URL = "url";
 
         public static final SQLiteTable TABLE = new SQLiteTable(TABLE_NAME)
-                .addColumn(TID, Column.DataType.INTEGER)
+                .addColumn(PID, Column.DataType.INTEGER)
                 .addColumn(URL, Column.DataType.TEXT);
     }
 

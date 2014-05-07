@@ -26,6 +26,8 @@
         </activity>
 
         <activity android:name=".ui.MainActivity"/>
+        <activity android:name=".ui.PostContentActivity"/>
+        <activity android:name=".ui.ImageViewActivity"/>
 
         <provider
             android:name=".dao.DataProvider"

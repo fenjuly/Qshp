@@ -33,11 +33,19 @@ public class DataProvider extends ContentProvider {
 
     private static final int POSTS = 0;
 
-    public static final String PATH_IMAGES = "/posts";
+    public static final String PATH_IMAGES = "/images";
 
-    public static final Uri IMAGES_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_POSTS);
+    public static final Uri IMAGES_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_IMAGES);
 
     private static final int IMAGES = 1;
+
+
+    public static final String PATH_ITEMS = "/items";
+
+    public static final Uri ITEMS_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_ITEMS);
+
+    private static final int ITEMS = 2;
+
     /*
     * MIME type definitions
     */
@@ -45,12 +53,15 @@ public class DataProvider extends ContentProvider {
 
     public static final String IMAGE_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.qingshuihepan.uestc.image";
 
+    public static final String ITEM_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.qingshuihepan.uestc.item";
+
     private static final UriMatcher sUriMatcher;
 
     static {
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         sUriMatcher.addURI(AUTHORITY, "posts", POSTS);
         sUriMatcher.addURI(AUTHORITY, "images", IMAGES);
+        sUriMatcher.addURI(AUTHORITY, "items", ITEMS);
     }
 
     private static DBHelper mDBHelper;
@@ -97,6 +108,8 @@ public class DataProvider extends ContentProvider {
                 return POST_CONTENT_TYPE;
             case IMAGES:
                 return IMAGE_CONTENT_TYPE;
+            case ITEMS:
+                return  ITEM_CONTENT_TYPE;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
@@ -172,6 +185,9 @@ public class DataProvider extends ContentProvider {
                 break;
             case IMAGES:
                 table = ImagesDataHelper.ImagesDBInfo.TABLE_NAME;
+                break;
+            case ITEMS:
+                table = ItemsDataHelper.ItemsDBInfo.TABLE_NAME;
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);

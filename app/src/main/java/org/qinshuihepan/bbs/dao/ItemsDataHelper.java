@@ -1,10 +1,5 @@
 package org.qinshuihepan.bbs.dao;
 
-/**
- * Created by liurongchan on 14-4-23.
- */
-
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -12,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.support.v4.content.CursorLoader;
+import android.widget.BaseAdapter;
 
 import org.qinshuihepan.bbs.model.BasePost;
 import org.qinshuihepan.bbs.util.database.Column;
@@ -20,40 +16,43 @@ import org.qinshuihepan.bbs.util.database.SQLiteTable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostsDataHelper extends BaseDataHelper {
+/**
+ * Created by liurongchan on 14-5-2.
+ */
+public class ItemsDataHelper extends BaseDataHelper {
 
-    public PostsDataHelper(Context context) {
+    public ItemsDataHelper(Context context) {
         super(context);
     }
 
     @Override
     protected Uri getContentUri() {
-        return DataProvider.POSTS_CONTENT_URI;
+        return DataProvider.ITEMS_CONTENT_URI;
     }
 
     private ContentValues getContentValues(BasePost post) {
         ContentValues values = new ContentValues();
-        values.put(PostsDBInfo.FID, post.fid);
-        values.put(PostsDBInfo.PID, post.pid);
-        values.put(PostsDBInfo.TID, post.tid);
-        values.put(PostsDBInfo.TITLE, post.title);
-        values.put(PostsDBInfo.CONTENT, post.content);
-        values.put(PostsDBInfo.TIME, post.time);
-        values.put(PostsDBInfo.HAVEIMG, post.haveimg);
-        values.put(PostsDBInfo.COMMENT_COUNT, post.comment_count);
-        values.put(PostsDBInfo.AUTHOR, post.author);
+        values.put(ItemsDBInfo.FID, post.fid);
+        values.put(ItemsDBInfo.PID, post.pid);
+        values.put(ItemsDBInfo.TID, post.tid);
+        values.put(ItemsDBInfo.TITLE, post.title);
+        values.put(ItemsDBInfo.CONTENT, post.content);
+        values.put(ItemsDBInfo.TIME, post.time);
+        values.put(ItemsDBInfo.HAVEIMG, post.haveimg);
+        values.put(ItemsDBInfo.COMMENT_COUNT, post.comment_count);
+        values.put(ItemsDBInfo.AUTHOR, post.author);
         return values;
     }
 
     public BasePost query(long tid) {
         BasePost post = null;
-        Cursor cursor = query(null, PostsDBInfo.TID + "=?",
+        Cursor cursor = query(null, ItemsDBInfo.TID + "=?",
                 new String[]{
                         String.valueOf(tid)
                 }, null
         );
         if (cursor.moveToFirst()) {
-            post = post.fromCursor(cursor, BasePost.POST);
+            post = post.fromCursor(cursor, BasePost.ITEM);
         }
         cursor.close();
         return post;
@@ -73,20 +72,20 @@ public class PostsDataHelper extends BaseDataHelper {
         synchronized (DataProvider.DBLock) {
             DBHelper mDBHelper = DataProvider.getDBHelper();
             SQLiteDatabase db = mDBHelper.getWritableDatabase();
-            int row = db.delete(PostsDBInfo.TABLE_NAME, null, null);
+            int row = db.delete(ItemsDBInfo.TABLE_NAME, null, null);
             return row;
         }
     }
 
     public CursorLoader getCursorLoader() {
-        return new CursorLoader(getContext(), getContentUri(), null, null, null, PostsDBInfo._ID + " ASC");
+        return new CursorLoader(getContext(), getContentUri(), null, null, null, ItemsDBInfo._ID + " ASC");
     }
 
-    public static final class PostsDBInfo implements BaseColumns {
-        private PostsDBInfo() {
+    public static final class ItemsDBInfo implements BaseColumns {
+        private ItemsDBInfo() {
         }
 
-        public static final String TABLE_NAME = "posts";
+        public static final String TABLE_NAME = "items";
 
         public static final String FID = "fid";
 
@@ -119,6 +118,4 @@ public class PostsDataHelper extends BaseDataHelper {
                 .addColumn(AUTHOR, Column.DataType.TEXT);
     }
 
-
 }
-

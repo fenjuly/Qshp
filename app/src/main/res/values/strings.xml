@@ -29,6 +29,13 @@
     <string name="password">密码</string>
     <string name="confirm">登陆新账号</string>
 
+
+
+    <!-- else -->
+    <string name="view_big_image">查看大图</string>
+    <string name="view_post">本帖内容</string>
+
+
     <!-- The id of secondary forum -->
     <string name="保研考研">199</string>
     <string name="LaTeX技术交流">308</string>

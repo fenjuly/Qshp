@@ -15,11 +15,11 @@ public class Image {
     private static final HashMap<String, Image> CACHE = new HashMap<String, Image>();
 
     public String url;
-    public int tid;
+    public int pid;
 
-    public Image(String url, int tid) {
+    public Image(String url, int pid) {
         this.url = url;
-        this.tid = tid;
+        this.pid = pid;
     }
 
 
@@ -38,21 +38,25 @@ public class Image {
         if (image != null) {
             return image;
         }
-        int tid = cursor.getInt(cursor.getColumnIndex(ImagesDataHelper.ImagesDBInfo.TID));
-        image = new Image(url, tid);
+        int pid = cursor.getInt(cursor.getColumnIndex(ImagesDataHelper.ImagesDBInfo.PID));
+        image = new Image(url, pid);
         addToCache(image);
         return image;
     }
 
     public static ArrayList<Image> listfromCursor(Cursor cursor) {
         ArrayList<Image> images = new ArrayList<Image>();
+        System.out.println(cursor.getCount());
         if (cursor.getCount() == 0) {
+            System.out.println("圖片爲0");
             return images;
         }
-        while (cursor.moveToNext()) {
-            int tid = cursor.getInt(cursor.getColumnIndex(ImagesDataHelper.ImagesDBInfo.TID));
+        for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            int pid = cursor.getInt(cursor.getColumnIndex(ImagesDataHelper.ImagesDBInfo.PID));
             String url = cursor.getString(cursor.getColumnIndex(ImagesDataHelper.ImagesDBInfo.URL));
-            images.add(new Image(url, tid));
+            images.add(new Image(url, pid));
+            System.out.println("有圖片：");
+            System.out.println(url);
         }
         return images;
     }

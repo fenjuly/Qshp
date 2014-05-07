@@ -2,6 +2,7 @@ package org.qinshuihepan.bbs.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 import org.qinshuihepan.bbs.R;
 import org.qinshuihepan.bbs.model.BasePost;
+import org.qinshuihepan.bbs.ui.MainActivity;
+import org.qinshuihepan.bbs.ui.PostContentActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -39,7 +42,7 @@ public class PostsAdapter extends CursorAdapter {
     @Override
     public BasePost getItem(int position) {
         mCursor.moveToPosition(position);
-        return BasePost.fromCursor(mCursor);
+        return BasePost.fromCursor(mCursor, BasePost.POST);
     }
 
     @Override
@@ -52,7 +55,7 @@ public class PostsAdapter extends CursorAdapter {
         Holder holder = getHolder(view);
         view.setEnabled(!mListView.isItemChecked(cursor.getPosition()
                 + mListView.getHeaderViewsCount()));
-        BasePost post = BasePost.fromCursor(cursor);
+        final BasePost post = BasePost.fromCursor(cursor, BasePost.POST);
         int resid = LEFT_STRIPS[(int) (Math.random() * 6)];
 
         holder.left_strip.setImageResource(resid);
@@ -60,6 +63,15 @@ public class PostsAdapter extends CursorAdapter {
         holder.content.setText(post.content);
         holder.time.setText(post.time);
         holder.comment_count.setText(String.valueOf(post.comment_count));
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, PostContentActivity.class);
+                intent.putExtra(PostContentActivity.FID, post.fid);
+                intent.putExtra(PostContentActivity.TID, post.tid);
+                mContext.startActivity(intent);
+            }
+        });
 
     }
 

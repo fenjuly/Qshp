@@ -13,9 +13,9 @@ public class Api {
 
     public static final String POSTS = HOST + "/forum.php?mod=forumdisplay&fid=" + "%1$s" + "&page=" + "%2$s"; //paramter: id, page_number
 
-    public static final String POST_CONTENT = HOST + "/forum.php?mod=viewthread&tid=" + "%1$s" + "&extra=page%3D1"; //paramter: tid
+    public static final String POST_CONTENT = HOST + "/forum.php?mod=viewthread&tid=" + "%1$s" + "&extra=page&page=" + "%2$s"; //paramter: tid
 
-    public static final String REPLY = HOST + "/forum.php?mod=post&infloat=yes&action=reply&fid=" + "%1$s" + "&extra=page%3D1&tid=" + "%2$s" + "&replysubmit=yes&handlekey=fastpost&inajax=1"; //paramter: fid, tid
+    public static final String REPLY = HOST + "/forum.php?mod=post&infloat=yes&action=reply&fid=" + "%1$s" + "&extra=page&tid=" + "%2$s" + "&replysubmit=yes&handlekey=fastpost&inajax=1"; //paramter: fid, tid
 
-    public static final String REPLY_SINGLE = HOST + "/forum.php?mod=post&infloat=yes&action=reply&fid=" + "%1$s" + "&extra=page%3D1&tid=" + "%2$s" + "&replysubmit=yes&inajax=1";
+    public static final String REPLY_SINGLE = HOST + "/forum.php?mod=post&infloat=yes&action=reply&fid=" + "%1$s" + "&extra=page&tid=" + "%2$s" + "&replysubmit=yes&inajax=1";
 }

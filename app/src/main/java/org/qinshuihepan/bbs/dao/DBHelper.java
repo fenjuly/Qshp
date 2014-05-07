@@ -22,6 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         PostsDataHelper.PostsDBInfo.TABLE.create(db);
         ImagesDataHelper.ImagesDBInfo.TABLE.create(db);
+        ItemsDataHelper.ItemsDBInfo.TABLE.create(db);
     }
 
     @Override

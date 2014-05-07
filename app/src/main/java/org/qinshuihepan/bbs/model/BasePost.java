@@ -4,22 +4,35 @@ import android.content.Context;
 import android.database.Cursor;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.qinshuihepan.bbs.App;
+import org.qinshuihepan.bbs.R;
 import org.qinshuihepan.bbs.dao.ImagesDataHelper;
+import org.qinshuihepan.bbs.dao.ItemsDataHelper;
 import org.qinshuihepan.bbs.dao.PostsDataHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * Created by liurongchan on 14-4-23.
  */
 public class BasePost {
-    public static final HashMap<Integer, BasePost> CACHE = new HashMap<Integer, BasePost>();
+    public static final HashMap<Integer, BasePost> CACHE_POST = new HashMap<Integer, BasePost>();
 
+    public static final HashMap<Integer, BasePost> CACHE_ITEM = new HashMap<Integer, BasePost>();
     public static final int NOIMG = 0;
     public static final int YESIMG = 1;
+
+    public static final String POST = "post";
+
+    public static final String ITEM = "item";
 
     private static ImagesDataHelper miDataHelper = new ImagesDataHelper(App.getContext());
 
@@ -31,42 +44,82 @@ public class BasePost {
         return null;
     }
 
-    public void bindView(View view, Context context, Cursor cursor) {
-    }
-
-    public static void addToCache(BasePost post) {
-        CACHE.put(post.tid, post);
-    }
-
-    public static BasePost getFromCache(int tid) {
-        return CACHE.get(tid);
-    }
-
-    public static BasePost fromCursor(Cursor cursor) {
-        int tid = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.TID));
-        BasePost post = getFromCache(tid);
-        if (post != null) {
-            return post;
-        }
-
-        int fid = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.FID));
-        int pid = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.PID));
-        String title = cursor.getString(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.TITLE));
-        String content = cursor.getString(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.CONTENT));
-        String time = cursor.getString(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.TIME));
-        int haveimg = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.HAVEIMG));
-        int comment_count = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.COMMENT_COUNT));
-        String author = cursor.getString(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.AUTHOR));
-
-        ArrayList<Image> images = null;
-        if (haveimg == NOIMG) {
-            post = new Post(fid, tid, pid, title, content, time, haveimg, comment_count, author, images);
+    public static void bindView(View view, Context context, Cursor cursor, int type) {
+        if (type == 0) {
+            Post.bindView(view, context, cursor);
         } else {
-
-            images = miDataHelper.queryImages(tid);
-            post = new PostWithPic(fid, tid, pid, title, content, time, haveimg, comment_count, author, images);
+            PostWithPic.bindView(view, context, cursor);
         }
-        addToCache(post);
+    }
+
+    public static void addToCache(BasePost post, String type) {
+        if (type.equals(POST)) {
+            CACHE_POST.put(post.tid, post);
+        } else {
+            CACHE_ITEM.put(post.pid, post);
+        }
+    }
+
+    public static BasePost getFromCache(int id, String type) {
+        if (type.equals(ITEM)) {
+            return CACHE_ITEM.get(id);
+        } else {
+            return CACHE_POST.get(id);
+        }
+    }
+
+    public static BasePost fromCursor(Cursor cursor, String type) {
+        BasePost post = null ;
+        ArrayList<Image> images = null;
+        if (type.equals(POST)) {
+            int tid = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.TID));
+            post = getFromCache(tid, type);
+            if (post != null) {
+                System.out.println("return post1");
+                return post;
+            }
+
+            int fid = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.FID));
+            int pid = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.PID));
+            String title = cursor.getString(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.TITLE));
+            String content = cursor.getString(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.CONTENT));
+            String time = cursor.getString(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.TIME));
+            int haveimg = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.HAVEIMG));
+            int comment_count = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.COMMENT_COUNT));
+            String author = cursor.getString(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.AUTHOR));
+
+                post = new Post(fid, tid, pid, title, content, time, haveimg, comment_count, author, images);
+            addToCache(post, type);
+        } else {
+            int pid = cursor.getInt(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.PID));
+            System.out.println(pid);
+            post = getFromCache(pid, type);
+            if (post != null) {
+                System.out.println("return post2");
+                return post;
+            }
+
+            int fid = cursor.getInt(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.FID));
+            int tid = cursor.getInt(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.TID));
+            String title = cursor.getString(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.TITLE));
+            String content = cursor.getString(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.CONTENT));
+            String time = cursor.getString(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.TIME));
+            int haveimg = cursor.getInt(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.HAVEIMG));
+            System.out.println(haveimg);
+            int comment_count = cursor.getInt(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.COMMENT_COUNT));
+            String author = cursor.getString(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.AUTHOR));
+
+
+            if (haveimg == NOIMG) {
+                post = new Post(fid, tid, pid, title, content, time, haveimg, comment_count, author, images);
+            } else {
+
+                images = miDataHelper.queryImages(pid);
+                post = new PostWithPic(fid, tid, pid, title, content, time, haveimg, comment_count, author, images);
+                System.out.println("pre images: " + images);
+            }
+            addToCache(post, type);
+        }
         return post;
     }
 
@@ -93,4 +146,37 @@ public class BasePost {
     public int comment_count;
     public String author;
     public ArrayList<Image> images;
+
+
+    public static Holder getHolder(final View view) {
+        Holder holder = (Holder) view.getTag();
+        if (holder == null) {
+            holder = new Holder(view);
+            view.setTag(holder);
+        }  else {
+            holder.layout.removeAllViews();
+        }
+        return holder;
+    }
+
+
+    static class Holder {
+
+        @InjectView(R.id.author)
+        TextView author;
+
+
+        @InjectView(R.id.time)
+        TextView time;
+
+        @InjectView(R.id.content)
+        TextView content;
+
+        @InjectView(R.id.img_area)
+        LinearLayout layout;
+
+        public Holder(View view) {
+            ButterKnife.inject(this, view);
+        }
+    }
 }
