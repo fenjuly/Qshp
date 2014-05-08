@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -17,13 +16,11 @@ import org.qinshuihepan.bbs.ui.ImageViewActivity;
 
 import java.util.ArrayList;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
 /**
  * Created by liurongchan on 14-4-23.
  */
 public class PostWithPic extends BasePost implements ListItem {
+
 
     public PostWithPic(int fid, int tid, int pid, String title, String content, String time, int haveimg, int comment_count, String author, ArrayList<Image> images) {
         super(fid, tid, pid, title, content, time, haveimg, comment_count, author, images);
@@ -75,6 +72,7 @@ public class PostWithPic extends BasePost implements ListItem {
         holder.content.setText(post.content);
         holder.time.setText(post.time);
         holder.author.setText(post.author);
+
 
     }
 

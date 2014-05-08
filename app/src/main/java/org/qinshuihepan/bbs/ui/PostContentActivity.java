@@ -71,9 +71,7 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
 
     private int tid;
     private int fid;
-    private int pid;
-    private String time;
-    private String content;
+
     private ItemsDataHelper mtDataHelper;
     private ImagesDataHelper miDataHelper;
     private PostContentAdapter mAdapter;
@@ -81,6 +79,9 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
     private int maxPage;
     private boolean isloadmaxpage = false;
     private ProgressDialog progressDialog;
+
+    ArrayList<BasePost> posts = new ArrayList<BasePost>();
+
 
     String formhash = "";
     String url = "";
@@ -122,7 +123,7 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
 
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int postion, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int postion, long id) {
                 final EditText editText = new EditText(PostContentActivity.this);
                 editText.setHeight(PostContentActivity.this.getResources().getDimensionPixelSize(
                         R.dimen.comment_dialog_height));
@@ -137,7 +138,7 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
                 final AlertDialog dialog = commentDialog.create();
                 dialog.show();
 
-                if (postion == 0) {
+                if (postion == 1) {
                     url = String.format(Api.REPLY, fid, tid);
                     dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
                             new View.OnClickListener() {
@@ -178,7 +179,7 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
                                                 Toast.LENGTH_SHORT).show();
                                     } else {
                                         dialog.dismiss();
-                                        final String[] params = {url, message};
+                                        final String[] params = {url, message, String.valueOf(postion)};
                                         final Comment_Single comment_single = new Comment_Single();
                                         progressDialog = ProgressDialog.show(PostContentActivity.this,
                                                 null, "请稍后");
@@ -237,17 +238,18 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
                 boolean isRefreshFromTop = (1 == mPage);
                 try {
                     ArrayList<Image> images = new ArrayList<Image>();
-                    ArrayList<BasePost> posts = new ArrayList<BasePost>();
-                    Document doc;
-                    String author;
 
+                    Document doc;
+                    int pid;
+                    String time;
+                    String content;
+                    String author;
 
                     if (isRefreshFromTop) {
                         mtDataHelper.deleteAll();
                         miDataHelper.deleteAll();
                     }
                     Connection.Response res = Request.execute(String.format(Api.POST_CONTENT, tid, next), "Mozilla", (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
-
 
 
                     Athority.addCookies(res.cookies());
@@ -260,6 +262,7 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
                     }
 
                     Elements plhins = doc.getElementsByClass("plhin");
+                    posts.clear();
                     for (Element plhin : plhins) {
                         pid = Integer.valueOf(plhin.id().substring("pid".length()));
                         Elements xw1s = plhin.getElementsByClass("xw1");
@@ -472,13 +475,14 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
             int statusCode = 0;
             String noticetrimstr;
             noticetrimstr = "[quote][size=2][url=forum.php?mod=redirect&goto=findpost&pid="
-                    + pid
-                    + "&ptid="
-                    + tid
-                    + "][color=#999999]jacob-gu "
-                    + time
+                    + posts.get(Integer.valueOf(params[2]) - 1).pid
+                    + "&tid="
+                    + posts.get(Integer.valueOf(params[2]) - 1).tid
+                    + "][color=#999999]"
+                    + posts.get(Integer.valueOf(params[2]) - 1).author
+                    + posts.get(Integer.valueOf(params[2]) - 1).time
                     + "[/color][/url][/size] "
-                    + content
+                    + posts.get(Integer.valueOf(params[2]) - 1).content
                     + "[/quote]";
 
             HashMap<String, String> datas = new HashMap<String, String>();
@@ -510,6 +514,7 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
         }
 
     }
+
 }
 
 
