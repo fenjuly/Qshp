@@ -1,7 +1,6 @@
 package org.qinshuihepan.bbs.ui;
 
 import android.app.ActionBar;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -16,6 +15,7 @@ import org.qinshuihepan.bbs.R;
 import org.qinshuihepan.bbs.ui.fragment.DrawerFragment;
 import org.qinshuihepan.bbs.ui.fragment.PostsFragment;
 import org.qinshuihepan.bbs.util.Utils;
+import org.qinshuihepan.bbs.util.update.UpdateChecker;
 import org.qinshuihepan.bbs.view.FoldingDrawerLayout;
 
 import butterknife.ButterKnife;
@@ -40,6 +40,8 @@ public class MainActivity extends FragmentActivity {
         initActionBar();
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        UpdateChecker.checkForNotification(MainActivity.this);
 
         setCategory(Utils.FORUM_CATEGORY[13]);
         replaceFragment(R.id.left_drawer, new DrawerFragment());
