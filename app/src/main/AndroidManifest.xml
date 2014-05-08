@@ -11,11 +11,12 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:hardwareAccelerated="false">
 
 
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.LaunchActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,9 +26,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.MainActivity"/>
-        <activity android:name=".ui.PostContentActivity"/>
-        <activity android:name=".ui.ImageViewActivity"/>
+        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.PostContentActivity" />
+        <activity android:name=".ui.ImageViewActivity" />
+        <activity android:name=".ui.LoginActivity" />
 
         <provider
             android:name=".dao.DataProvider"

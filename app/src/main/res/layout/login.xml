@@ -12,7 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/login_area"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logo_text" />
 
     <LinearLayout
         android:id="@+id/login_area"

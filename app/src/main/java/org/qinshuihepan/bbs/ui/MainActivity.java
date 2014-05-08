@@ -41,7 +41,7 @@ public class MainActivity extends FragmentActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        setCategory(Utils.FORUM_CATEGORY[13]);
+        setCategory(Utils.FORUM_CATEGORY[1]);
         replaceFragment(R.id.left_drawer, new DrawerFragment());
     }
 
@@ -80,17 +80,17 @@ public class MainActivity extends FragmentActivity {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-//        switch (item.getItemId()) {
-//            case R.id.action_refresh:
-//                mContentFragment.loadFirstAndScrollToTop();
-//                return true;
-//            case R.id.action_settings:
-//                startActivity(new Intent(this, PreferenceActivity.class));
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-        return false;
+        switch (item.getItemId()) {
+            case R.id.changeAcount:
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+                return true;
+            case R.id.myposts:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+//        return false;
     }
 
 

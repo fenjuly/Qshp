@@ -117,6 +117,9 @@ public class LoginActivity extends Activity {
         Map<String, String> cookies = new HashMap<String, String>();
         try {
             Connection.Response before_login = Request.execute(Api.COOKIE_LOGIN, "Mozilla", Connection.Method.POST);
+            if(before_login == null) {
+                Toast.makeText(LoginActivity.this, "网络不稳定,请重试!", Toast.LENGTH_SHORT).show();
+            }
             doc = before_login.parse();
             Element hash = doc.getElementById("scbar_form");
             Elements hashs = hash.getElementsByTag("input");

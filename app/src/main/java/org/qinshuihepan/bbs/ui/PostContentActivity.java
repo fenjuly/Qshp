@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.http.HttpResponseCache;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -46,6 +47,7 @@ import org.qinshuihepan.bbs.util.sharedpreference.Athority;
 import org.qinshuihepan.bbs.view.LoadingFooter;
 import org.qinshuihepan.bbs.view.PageListView;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,6 +84,8 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
 
     String formhash = "";
     String url = "";
+
+    private HttpResponseCache httpResponseCache;
 
 
     @Override
@@ -200,6 +204,14 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
                 android.R.color.holo_red_light);
         getSupportLoaderManager().initLoader(1, null, this);
         loadFirst();
+
+        try {
+            File httpCacheDir = new File(PostContentActivity.this.getExternalCacheDir(), "http");
+            long httpCacheSize = 20 * 1024 * 1024; // 10 MiB
+            httpResponseCache = HttpResponseCache.install(httpCacheDir, httpCacheSize);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -235,6 +247,12 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
                         miDataHelper.deleteAll();
                     }
                     Connection.Response res = Request.execute(String.format(Api.POST_CONTENT, tid, next), "Mozilla", (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
+
+                    if (res == null) {
+                        Toast.makeText(PostContentActivity.this, "网络不稳定,请重试!", Toast.LENGTH_SHORT).show();
+                    }
+
+
                     Athority.addCookies(res.cookies());
                     doc = res.parse();
                     Elements inputs = doc.getElementsByTag("input");
@@ -353,6 +371,17 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            httpResponseCache.delete();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     private void loadFirst() {
         mPage = 1;
         loadData(mPage);
@@ -387,6 +416,10 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
     public void onStop() {
         super.onStop();
         mAdapter.changeCursor(null);
+        HttpResponseCache cache = HttpResponseCache.getInstalled();
+        if (cache != null) {
+            cache.flush();
+        }
     }
 
     @Override

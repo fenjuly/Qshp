@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class Athority {
 
-    private static final String ACCOUNT_INFORMATION = "accout_information";
+    public static final String ACCOUNT_INFORMATION = "accout_information";
 
     private static SharedPreferences mShared;
 

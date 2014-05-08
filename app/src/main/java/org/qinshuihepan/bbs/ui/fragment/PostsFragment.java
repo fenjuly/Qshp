@@ -138,7 +138,6 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                     try {
                         Connection.Response response = Request.execute(Api.HOST, "Mozilla", (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
                         System.out.println(Api.HOST);
-                        System.out.println(mCategory + tempCategoryID);
                         doc = response.parse();
                         Element portalBlockContents = null;
                         String title = "";
@@ -149,13 +148,14 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                         String author = "";
                         BasePost post;
                         switch (tempCategoryID) {
-                            case 10001:
+                            case 10002:
                                 portalBlockContents = doc
                                         .getElementById("portal_block_21_content");
                                 break;
-                            case 10002:
+                            case 10001:
                                 portalBlockContents = doc
-                                        .getElementById("portal_block_20_content");
+                                        .getElementById("portal_block_207" +
+                                                "_content");
                                 break;
                             case 10003:
                                 portalBlockContents = doc
@@ -184,7 +184,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                     } else {
                         mListView.setState(LoadingFooter.State.Idle, 3000);
                     }
-                    getLoaderManager().restartLoader(0, null, PostsFragment.this);
+//                    getLoaderManager().restartLoader(0, null, PostsFragment.this);
                 }
             });
         } else {

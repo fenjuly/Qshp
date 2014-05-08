@@ -37,6 +37,11 @@
 
 
     <!-- The id of secondary forum -->
+
+    <string name="最新回复">10001</string>
+    <string name="最新发表">10002</string>
+    <string name="今日热门">10003</string>
+
     <string name="保研考研">199</string>
     <string name="LaTeX技术交流">308</string>
     <string name="聚焦两会">277</string>
@@ -98,8 +103,5 @@
     <string name="软件资源">252</string>
     <string name="音乐资源">229</string>
 
-    <string name="最新回复">10001</string>
-    <string name="最新发表">10002</string>
-    <string name="今日热门">10003</string>
 
 </resources>

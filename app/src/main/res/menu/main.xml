@@ -20,6 +20,14 @@
         android:title="个反馈意见"
         android:orderInCategory="100"
         android:showAsAction="never" />
+
+    <item
+        android:id="@+id/changeAcount"
+        android:title="切换帐号"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+
+        />
     <item
         android:id="@+id/search"
         android:title="搜索帖子"
