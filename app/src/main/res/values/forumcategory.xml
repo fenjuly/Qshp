@@ -2,8 +2,8 @@
 <resources>
 
     <string-array name="forumcategory">
-        <item>最新回复</item>
         <item>最新发表</item>
+        <item>最新回复</item>
         <item>今日热门</item>
 
         <item>LaTeX技术交流 </item>

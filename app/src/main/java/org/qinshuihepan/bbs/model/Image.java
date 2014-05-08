@@ -46,17 +46,13 @@ public class Image {
 
     public static ArrayList<Image> listfromCursor(Cursor cursor) {
         ArrayList<Image> images = new ArrayList<Image>();
-        System.out.println(cursor.getCount());
         if (cursor.getCount() == 0) {
-            System.out.println("圖片爲0");
             return images;
         }
         for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
             int pid = cursor.getInt(cursor.getColumnIndex(ImagesDataHelper.ImagesDBInfo.PID));
             String url = cursor.getString(cursor.getColumnIndex(ImagesDataHelper.ImagesDBInfo.URL));
             images.add(new Image(url, pid));
-            System.out.println("有圖片：");
-            System.out.println(url);
         }
         return images;
     }

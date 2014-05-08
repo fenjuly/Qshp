@@ -112,7 +112,8 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
             @Override
             public void onLoadNext() {
                 if (mPage >= maxPage) {
-                    Toast.makeText(getApplicationContext(), "已經滑到底啦！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "已经滑到底啦！", Toast.LENGTH_SHORT).show();
+                    mListView.setState(LoadingFooter.State.TheEnd);
                 } else {
                     loadNext();
                 }
@@ -130,7 +131,7 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
                 editText.setGravity(Gravity.LEFT | Gravity.TOP);
 
                 AlertDialog.Builder commentDialog = new AlertDialog.Builder(
-                        PostContentActivity.this).setTitle("回复楼主").setView(editText)
+                        PostContentActivity.this).setTitle("回复").setView(editText)
                         .setNegativeButton("取消", null)
                         .setPositiveButton("确定", null);
                 final AlertDialog dialog = commentDialog.create();
@@ -227,7 +228,7 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
 
 
     private void loadData(final int next) {
-        if (!mSwipeLayout.isRefreshing() && (0 == next)) {
+        if (!mSwipeLayout.isRefreshing() && (1 == next)) {
             mSwipeLayout.setRefreshing(true);
         }
         TaskUtils.executeAsyncTask(new AsyncTask<Void, Object, Boolean>() {
@@ -237,20 +238,16 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
                 try {
                     ArrayList<Image> images = new ArrayList<Image>();
                     ArrayList<BasePost> posts = new ArrayList<BasePost>();
-                    Document doc = null;
+                    Document doc;
                     String author;
 
 
-                    int haveimg;
                     if (isRefreshFromTop) {
                         mtDataHelper.deleteAll();
                         miDataHelper.deleteAll();
                     }
                     Connection.Response res = Request.execute(String.format(Api.POST_CONTENT, tid, next), "Mozilla", (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
 
-                    if (res == null) {
-                        Toast.makeText(PostContentActivity.this, "网络不稳定,请重试!", Toast.LENGTH_SHORT).show();
-                    }
 
 
                     Athority.addCookies(res.cookies());
@@ -313,7 +310,7 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
                                 mPage = maxPage;
                                 Elements page_numbers = pgt.getElementsByTag("a");
                                 int now_number = 1;
-                                String str_now_number = "";
+                                String str_now_number;
                                 for (Element page_number : page_numbers) {
                                     str_now_number = page_number.text();
                                     if (str_now_number.startsWith("... ")) {
@@ -400,6 +397,9 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor data) {
         mAdapter.changeCursor(data);
+//        if (data != null && data.getCount() == 0) {
+//            loadFirst();
+//        }
     }
 
     @Override

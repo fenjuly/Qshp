@@ -40,7 +40,6 @@ public class PostWithPic extends BasePost implements ListItem {
     }
 
     public static void bindView(View view, final Context context, Cursor cursor) {
-        System.out.println("postwithpicbindview");
         LinearLayout layout;
         ArrayList<ImageView> imgviews = new ArrayList<ImageView>();
         ArrayList<Image> images;

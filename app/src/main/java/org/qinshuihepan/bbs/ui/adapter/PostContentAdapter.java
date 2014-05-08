@@ -50,10 +50,8 @@ public class PostContentAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         if (cursor.getInt(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.HAVEIMG)) == 0) {
             type = 0;
-            System.out.println("wupic");
         } else {
             type = 1;
-            System.out.println("youpic");
         }
         BasePost.bindView(view, context, cursor, type);
     }

@@ -60,7 +60,6 @@ public class ImagesDataHelper extends BaseDataHelper {
         if (cursor.moveToFirst()) {
             images = Image.listfromCursor(cursor);
         }
-        System.out.println(cursor.getCount());
         cursor.close();
         return images;
     }

@@ -34,7 +34,6 @@ public class Post extends BasePost implements ListItem {
     }
 
     public static void bindView(View view, Context context, Cursor cursor) {
-        System.out.println("postbindview");
         Holder holder = getHolder(view);
 
         BasePost post = BasePost.fromCursor(cursor, ITEM);

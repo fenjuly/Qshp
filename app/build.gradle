@@ -21,11 +21,27 @@ android {
         abortOnError false
     }
 
+    signingConfigs {
+        myConfig {
+            storeFile file("fenjuly.keystore")
+            storePassword "qinshuihepan"
+            keyAlias "qshp"
+            keyPassword "qinshuihepan"
+        }
+    }
+
+    buildTypes{
+        release {
+            signingConfig  signingConfigs.myConfig
+            runProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+
 }
 
 
-
 dependencies {
-//    compile 'com.android.support:appcompat-v7:19.+'
+    //    compile 'com.android.support:appcompat-v7:19.+'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

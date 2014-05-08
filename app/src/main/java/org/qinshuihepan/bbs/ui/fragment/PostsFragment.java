@@ -60,8 +60,9 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
     private PostsDataHelper mpDataHelper;
     private PostsAdapter mAdapter;
     private int mPage = 1;
-    private int maxPage;
+    private int maxPage = 1;
     private boolean isloadmaxpage = false;
+
 
 
     public static PostsFragment newInstance(String category) {
@@ -88,7 +89,8 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
             @Override
             public void onLoadNext() {
                 if (mPage >= maxPage) {
-                    Toast.makeText(getActivity(), "已經滑到底啦！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "已经滑到底啦！", Toast.LENGTH_SHORT).show();
+                    mListView.setState(LoadingFooter.State.TheEnd);
                 } else {
                     loadNext();
                 }
@@ -103,7 +105,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                 android.R.color.holo_red_light);
 
         getLoaderManager().initLoader(0, null, this);
-        loadFirst();
+        mpDataHelper.deleteAll();
         return contentView;
     }
 
@@ -124,7 +126,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
 
 
     private void loadData(final int next) {
-        if (!mSwipeLayout.isRefreshing() && (0 == next)) {
+        if (!mSwipeLayout.isRefreshing() && (1 == next)) {
             mSwipeLayout.setRefreshing(true);
         }
         final Integer tempCategoryID = Integer.valueOf(App.getContext().getResources().getString(Integer.valueOf(Utils.FORUM_CATEGORY_ID.get(mCategory))));
@@ -137,7 +139,6 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                     mpDataHelper.deleteAll();
                     try {
                         Connection.Response response = Request.execute(Api.HOST, "Mozilla", (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
-                        System.out.println(Api.HOST);
                         doc = response.parse();
                         Element portalBlockContents = null;
                         String title = "";
@@ -154,8 +155,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                                 break;
                             case 10001:
                                 portalBlockContents = doc
-                                        .getElementById("portal_block_207" +
-                                                "_content");
+                                        .getElementById("portal_block_20_content");
                                 break;
                             case 10003:
                                 portalBlockContents = doc
@@ -356,6 +356,4 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
         }
         return true;
     }
-
-
 }

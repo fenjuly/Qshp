@@ -75,7 +75,6 @@ public class BasePost {
             int tid = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.TID));
             post = getFromCache(tid, type);
             if (post != null) {
-                System.out.println("return post1");
                 return post;
             }
 
@@ -95,7 +94,6 @@ public class BasePost {
             System.out.println(pid);
             post = getFromCache(pid, type);
             if (post != null) {
-                System.out.println("return post2");
                 return post;
             }
 
@@ -116,7 +114,6 @@ public class BasePost {
 
                 images = miDataHelper.queryImages(pid);
                 post = new PostWithPic(fid, tid, pid, title, content, time, haveimg, comment_count, author, images);
-                System.out.println("pre images: " + images);
             }
             addToCache(post, type);
         }
