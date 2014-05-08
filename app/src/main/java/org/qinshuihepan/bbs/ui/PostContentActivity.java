@@ -108,7 +108,7 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
             @Override
             public void onLoadNext() {
                 if (mPage >= maxPage) {
-                    Toast.makeText(getApplicationContext(), "已經滑到底啦！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "已经滑到底啦！", Toast.LENGTH_SHORT).show();
                 } else {
                     loadNext();
                 }
@@ -225,11 +225,10 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
                 try {
                     ArrayList<Image> images = new ArrayList<Image>();
                     ArrayList<BasePost> posts = new ArrayList<BasePost>();
-                    Document doc = null;
+                    Document doc;
                     String author;
 
 
-                    int haveimg;
                     if (isRefreshFromTop) {
                         mtDataHelper.deleteAll();
                         miDataHelper.deleteAll();
@@ -295,7 +294,7 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
                                 mPage = maxPage;
                                 Elements page_numbers = pgt.getElementsByTag("a");
                                 int now_number = 1;
-                                String str_now_number = "";
+                                String str_now_number;
                                 for (Element page_number : page_numbers) {
                                     str_now_number = page_number.text();
                                     if (str_now_number.startsWith("... ")) {

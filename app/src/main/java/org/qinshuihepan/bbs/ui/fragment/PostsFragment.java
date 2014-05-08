@@ -88,7 +88,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
             @Override
             public void onLoadNext() {
                 if (mPage >= maxPage) {
-                    Toast.makeText(getActivity(), "已經滑到底啦！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "已经滑到底啦！", Toast.LENGTH_SHORT).show();
                 } else {
                     loadNext();
                 }
@@ -356,6 +356,4 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
         }
         return true;
     }
-
-
 }
