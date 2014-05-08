@@ -107,5 +107,6 @@
     <string name="download_success">下载完成，点击安装</string>
     <string name="app_no_new_update">没有发现新版本</string>
     <string name="download_progress">正在下载:%1$d%%</string>
+    <string name="press_again_to_exit">再按一次退出～</string>
 
 </resources>

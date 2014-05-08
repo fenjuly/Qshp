@@ -8,8 +8,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import org.qinshuihepan.bbs.R;
 import org.qinshuihepan.bbs.ui.fragment.DrawerFragment;
@@ -17,6 +19,9 @@ import org.qinshuihepan.bbs.ui.fragment.PostsFragment;
 import org.qinshuihepan.bbs.util.Utils;
 import org.qinshuihepan.bbs.util.update.UpdateChecker;
 import org.qinshuihepan.bbs.view.FoldingDrawerLayout;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -32,6 +37,7 @@ public class MainActivity extends FragmentActivity {
 
     String mCategory;
 
+    private int keyBackClickCount;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,5 +111,35 @@ public class MainActivity extends FragmentActivity {
         setTitle(mCategory);
         mContentFragment = PostsFragment.newInstance(category);
         replaceFragment(R.id.content_frame, mContentFragment);
+    }
+
+    // 双击返回键退出
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            switch (keyBackClickCount++) {
+                case 0:
+                    Toast.makeText(this, R.string.press_again_to_exit,
+                            Toast.LENGTH_SHORT).show();
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            keyBackClickCount = 0;
+                        }
+                    }, 3000);
+                    break;
+
+                case 1:
+                    finish();
+                    break;
+
+                default:
+                    keyBackClickCount = 0;
+                    break;
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

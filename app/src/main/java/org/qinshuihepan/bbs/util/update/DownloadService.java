@@ -92,10 +92,7 @@ public class DownloadService extends IntentService {
 			 builder.start();
 
 			installAPKIntent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
-			//installAPKIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			//installAPKIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); 
-			//installAPKIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION); 
-			
+
 			PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, installAPKIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 			mBuilder.setContentIntent(pendingIntent);

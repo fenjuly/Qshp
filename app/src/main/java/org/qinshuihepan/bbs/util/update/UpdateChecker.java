@@ -54,8 +54,6 @@ public class UpdateChecker extends Fragment {
         UpdateChecker updateChecker = new UpdateChecker();
         Bundle args = new Bundle();
         args.putInt(NOTICE_TYPE_KEY, NOTICE_NOTIFICATION);
-        // args.putInt(NOTIFICATION_ICON_RES_ID_KEY, notificationIconResId);
-        // args.putInt(SUCCESSFUL_CHECKS_REQUIRED_KEY, 5);
         updateChecker.setArguments(args);
         content.add(updateChecker, null).commit();
     }
@@ -69,9 +67,6 @@ public class UpdateChecker extends Fragment {
         mContext = (FragmentActivity) activity;
         Bundle args = getArguments();
         mTypeOfNotice = args.getInt(NOTICE_TYPE_KEY);
-        // mSuccessfulChecksRequired =
-        // args.getInt(SUCCESSFUL_CHECKS_REQUIRED_KEY);
-        // mNotificationIconResId = args.getInt(NOTIFICATION_ICON_RES_ID_KEY);
         checkForUpdates();
     }
 
