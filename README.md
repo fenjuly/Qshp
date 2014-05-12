@@ -1,8 +1,10 @@
 Qshp
 ====
 
-th app of qinshuihepan(rewrite)
+- the app of qinshuihepan, the forum of uestc 
 
+
+- all things wrote by me all rights ```unreserved```
 
 ##About
   电子科技大学清水河畔论坛的android客户端。欢迎大家参与进来
@@ -37,7 +39,7 @@ th app of qinshuihepan(rewrite)
 License
 ============
 
-    Copyright 2014 fenjuly
+    Copyright 2014 xxx
 
         Licensed under the Apache License, Version 2.0 (the "License");
         you may not use this file except in compliance with the License.
