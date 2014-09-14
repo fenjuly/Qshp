@@ -1,20 +1,14 @@
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    compileSdkVersion 20
+    buildToolsVersion "20"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 19
+        targetSdkVersion 20
         versionCode 1
         versionName "1.0"
-    }
-    buildTypes {
-        release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-        }
     }
 
     lintOptions {
@@ -22,7 +16,7 @@ android {
     }
 
     signingConfigs {
-        myConfig {
+        release {
             storeFile file("fenjuly.keystore")
             storePassword "qinshuihepan"
             keyAlias "qshp"
@@ -32,7 +26,7 @@ android {
 
     buildTypes{
         release {
-            signingConfig  signingConfigs.myConfig
+            signingConfig  signingConfigs.release
             runProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
@@ -42,6 +36,5 @@ android {
 
 
 dependencies {
-    //    compile 'com.android.support:appcompat-v7:19.+'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
