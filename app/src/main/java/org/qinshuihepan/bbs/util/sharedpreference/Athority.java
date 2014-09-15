@@ -15,6 +15,8 @@ public class Athority {
 
     public static final String ACCOUNT_INFORMATION = "accout_information";
 
+    public static final String PREF_HAS_LOGINED = "has_logined";
+
     private static SharedPreferences mShared;
 
 

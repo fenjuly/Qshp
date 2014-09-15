@@ -5,17 +5,22 @@ package org.qinshuihepan.bbs.api;
  */
 public class Api {
 
-    public static final String HOST = "http://bbs.stuhome.net";
+    public static final String USER_AGENT = "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19";
 
-    public static final String COOKIE_LOGIN = HOST + "/member.php?mod=logging&action=login";
+    public static final String HOST = "http://bbs.stuhome.net/";
 
-    public static final String LOGIN = HOST + "/%1$s" + "&inajax=1"; //paramter: loginaction
+    public static final String COOKIE_LOGIN = HOST + "member.php?mod=logging&action=login";
 
-    public static final String POSTS = HOST + "/forum.php?mod=forumdisplay&fid=" + "%1$s" + "&page=" + "%2$s"; //paramter: id, page_number
+    public static final String LOGIN = HOST + "%1$s" + "&inajax=1"; //paramter: loginaction
 
-    public static final String POST_CONTENT = HOST + "/forum.php?mod=viewthread&tid=" + "%1$s" + "&extra=page&page=" + "%2$s"; //paramter: tid
+    public static final String POSTS = HOST + "forum.php?mod=forumdisplay&fid=" + "%1$s" + "&page=" + "%2$s"; //paramter: id, page_number
 
-    public static final String REPLY = HOST + "/forum.php?mod=post&infloat=yes&action=reply&fid=" + "%1$s" + "&extra=page&tid=" + "%2$s" + "&replysubmit=yes&handlekey=fastpost&inajax=1"; //paramter: fid, tid
+    public static final String POST_CONTENT = HOST + "forum.php?mod=viewthread&tid=" + "%1$s" + "&extra=page&page=" + "%2$s"; //paramter: tid
 
-    public static final String REPLY_SINGLE = HOST + "/forum.php?mod=post&infloat=yes&action=reply&fid=" + "%1$s" + "&extra=page&tid=" + "%2$s" + "&replysubmit=yes&inajax=1";
+    public static final String REPLY = HOST + "forum.php?mod=post&infloat=yes&action=reply&fid=" + "%1$s" + "&extra=page&tid=" + "%2$s" + "&replysubmit=yes&handlekey=fastpost&inajax=1"; //paramter: fid, tid
+
+    public static final String REPLY_SINGLE = HOST + "forum.php?mod=post&infloat=yes&action=reply&fid=" + "%1$s" + "&extra=page&tid=" + "%2$s" + "&replysubmit=yes&inajax=1";
+
+    //Mobile API
+    public static final String MOBILE_COOKIE_LOGIN = HOST + "member.php?mod=logging&action=login&mobile=1";
 }

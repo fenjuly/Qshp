@@ -17,8 +17,6 @@ import org.qinshuihepan.bbs.util.sharedpreference.Athority;
  */
 public class LaunchActivity extends Activity {
 
-    public static final String PREF_HAS_LOGINED = "has_logined";
-
     private Context mContext;
 
     @Override
@@ -29,7 +27,7 @@ public class LaunchActivity extends Activity {
         mContext = this;
         final SharedPreferences mShared = mContext.getSharedPreferences(
                 Athority.ACCOUNT_INFORMATION, Context.MODE_PRIVATE);
-        if (mShared.getString(PREF_HAS_LOGINED, "no").equals("yes")) {
+        if (mShared.getString(Athority.PREF_HAS_LOGINED, "no").equals("yes")) {
             new Handler().postDelayed(new Runnable() {
 
                 @Override
