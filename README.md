@@ -28,9 +28,8 @@ Qshp
 
 * [Picasso](https://github.com/square/picasso) A powerful image downloading and caching library for Android
 
-##感谢
-[stormzhang](https://github.com/stormzhang/9GAG)，参考了他的代码结构等。
+##Thanks
+- [stormzhang](https://github.com/stormzhang/9GAG)，参考了他的代码结构等。
 
-LICENSE
-============
-[The MIT License (MIT)](http://opensource.org/licenses/mit-license.php)
+##LICENSE
+- [The MIT License (MIT)](http://opensource.org/licenses/mit-license.php)
