@@ -1,16 +1,15 @@
 package org.qinshuihepan.bbs.ui;
 
-import android.app.ActionBar;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.dd.CircularProgressButton;
 
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
@@ -32,9 +31,9 @@ import butterknife.InjectView;
 
 /**
  * Created by liurongchan on 14-4-29.
+ * Modified on 14-9-15
  */
 public class LoginActivity extends Activity {
-
 
     private Context mContext;
 
@@ -45,9 +44,7 @@ public class LoginActivity extends Activity {
     public EditText passwordText;
 
     @InjectView(R.id.confirm)
-    public Button confirm;
-
-    private ProgressDialog progressDialog;
+    public CircularProgressButton confirm;
 
     private String username;
     private String password;
@@ -55,12 +52,11 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
         mContext = this;
-        ActionBar actionBar = getActionBar();
-        actionBar.hide();
 
+        confirm.setIndeterminateProgressMode(true);
         confirm.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -76,11 +72,10 @@ public class LoginActivity extends Activity {
                 } else {
                     MD5 m = new MD5();
                     password = m.getMD5ofStr(password);
-                    progressDialog = ProgressDialog.show(mContext, null, "请稍后");
+                    confirm.setProgress(50);
                     TaskUtils.executeAsyncTask(new AsyncTask<Void, Void, Boolean>() {
                         @Override
                         protected Boolean doInBackground(Void... voids) {
-
                             return isLoginSuccess();
                         }
 
@@ -88,13 +83,13 @@ public class LoginActivity extends Activity {
                         protected void onPostExecute(Boolean success) {
                             super.onPostExecute(success);
                             if (!success) {
-                                progressDialog.dismiss();
+                                confirm.setProgress(0);
                                 Toast.makeText(mContext, "用户名或密码错误!", Toast.LENGTH_SHORT)
                                         .show();
                                 usernameText.setText("");
                                 passwordText.setText("");
                             } else {
-                                progressDialog.dismiss();
+                                confirm.setProgress(100);
                                 Toast.makeText(mContext, "登录成功!", Toast.LENGTH_SHORT)
                                         .show();
                                 Intent intent = new Intent(mContext, MainActivity.class);
