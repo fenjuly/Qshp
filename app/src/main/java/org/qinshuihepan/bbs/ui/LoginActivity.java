@@ -76,7 +76,6 @@ public class LoginActivity extends Activity {
                     TaskUtils.executeAsyncTask(new AsyncTask<Void, Void, Boolean>() {
                         @Override
                         protected Boolean doInBackground(Void... voids) {
-
                             return isLoginSuccess();
                         }
 
@@ -84,7 +83,7 @@ public class LoginActivity extends Activity {
                         protected void onPostExecute(Boolean success) {
                             super.onPostExecute(success);
                             if (!success) {
-                                confirm.setProgress(-1);
+                                confirm.setProgress(0);
                                 Toast.makeText(mContext, "用户名或密码错误!", Toast.LENGTH_SHORT)
                                         .show();
                                 usernameText.setText("");
