@@ -22,7 +22,6 @@ public class Image {
         this.pid = pid;
     }
 
-
     private static void addToCache(Image image) {
         CACHE.put(image.url, image);
     }
@@ -30,7 +29,6 @@ public class Image {
     private static Image getFromCache(String url) {
         return CACHE.get(url);
     }
-
 
     public static Image fromCursor(Cursor cursor) {
         String url = cursor.getString(cursor.getColumnIndex(ImagesDataHelper.ImagesDBInfo.URL));
@@ -49,7 +47,7 @@ public class Image {
         if (cursor.getCount() == 0) {
             return images;
         }
-        for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
             int pid = cursor.getInt(cursor.getColumnIndex(ImagesDataHelper.ImagesDBInfo.PID));
             String url = cursor.getString(cursor.getColumnIndex(ImagesDataHelper.ImagesDBInfo.URL));
             images.add(new Image(url, pid));

@@ -13,48 +13,30 @@ import android.util.Log;
 
 import org.qinshuihepan.bbs.App;
 
-
 /**
  * Created by liurongchan on 14-4-23.
  */
 public class DataProvider extends ContentProvider {
 
-    static final String TAG = DataProvider.class.getSimpleName();
-
-    static final Object DBLock = new Object();
-
-    public  static final String AUTHORITY = "org.qingshuihepan.uestc.provider";
-
+    public static final String AUTHORITY = "org.qingshuihepan.uestc.provider";
     public static final String SCHEME = "content://";
-
     public static final String PATH_POSTS = "/posts";
-
     public static final Uri POSTS_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_POSTS);
-
-    private static final int POSTS = 0;
-
     public static final String PATH_IMAGES = "/images";
-
     public static final Uri IMAGES_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_IMAGES);
-
-    private static final int IMAGES = 1;
-
-
     public static final String PATH_ITEMS = "/items";
-
     public static final Uri ITEMS_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_ITEMS);
-
-    private static final int ITEMS = 2;
-
     /*
     * MIME type definitions
     */
     public static final String POST_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.qingshuihepan.uestc.post";
-
     public static final String IMAGE_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.qingshuihepan.uestc.image";
-
     public static final String ITEM_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.qingshuihepan.uestc.item";
-
+    static final String TAG = DataProvider.class.getSimpleName();
+    static final Object DBLock = new Object();
+    private static final int POSTS = 0;
+    private static final int IMAGES = 1;
+    private static final int ITEMS = 2;
     private static final UriMatcher sUriMatcher;
 
     static {
@@ -72,7 +54,6 @@ public class DataProvider extends ContentProvider {
         }
         return mDBHelper;
     }
-
 
     @Override
     public boolean onCreate() {
@@ -109,7 +90,7 @@ public class DataProvider extends ContentProvider {
             case IMAGES:
                 return IMAGE_CONTENT_TYPE;
             case ITEMS:
-                return  ITEM_CONTENT_TYPE;
+                return ITEM_CONTENT_TYPE;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }

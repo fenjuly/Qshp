@@ -3,7 +3,6 @@ package org.qinshuihepan.bbs.ui;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.database.Cursor;
 import android.net.http.HttpResponseCache;
 import android.os.AsyncTask;
@@ -14,9 +13,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.InputFilter;
-import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -53,9 +50,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
 /**
  * Created by liurongchan on 14-5-2.
  */
@@ -67,11 +61,11 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
     SwipeRefreshLayout mSwipeLayout;
 
     PageListView mListView;
-
-
+    ArrayList<BasePost> posts = new ArrayList<BasePost>();
+    String formhash = "";
+    String url = "";
     private int tid;
     private int fid;
-
     private ItemsDataHelper mtDataHelper;
     private ImagesDataHelper miDataHelper;
     private PostContentAdapter mAdapter;
@@ -79,15 +73,7 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
     private int maxPage;
     private boolean isloadmaxpage = false;
     private ProgressDialog progressDialog;
-
-    ArrayList<BasePost> posts = new ArrayList<BasePost>();
-
-
-    String formhash = "";
-    String url = "";
-
     private HttpResponseCache httpResponseCache;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,7 +202,6 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
         }
     }
 
-
     private void initActionBar() {
         View actionBarContainer = ActionBarUtils.findActionBarContainer(this);
         actionBarContainer.setOnClickListener(new View.OnClickListener() {
@@ -226,7 +211,6 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
             }
         });
     }
-
 
     private void loadData(final int next) {
         if (!mSwipeLayout.isRefreshing() && (1 == next)) {
@@ -250,7 +234,6 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
                         miDataHelper.deleteAll();
                     }
                     Connection.Response res = Request.execute(String.format(Api.POST_CONTENT, tid, next), "Mozilla", (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
-
 
                     Athority.addCookies(res.cookies());
                     doc = res.parse();
@@ -370,7 +353,6 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -380,7 +362,6 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
             e.printStackTrace();
         }
     }
-
 
     private void loadFirst() {
         mPage = 1;
@@ -431,13 +412,11 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
         getSupportLoaderManager().restartLoader(1, null, PostContentActivity.this);
     }
 
-
     private class Comment extends AsyncTask<String, Void, Integer> {
 
         @Override
         protected Integer doInBackground(String... params) {
             int statusCode = 0;
-
 
             HashMap<String, String> datas = new HashMap<String, String>();
             datas.put("message", params[1]);
@@ -448,7 +427,6 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
             datas.put("handlekey", "reply");
             datas.put("replysubmit", "true");
             Connection.Response res = Request.execute(params[0], "Mozilla", datas, (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.POST);
-
 
             statusCode = res.statusCode();
 
@@ -495,7 +473,6 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
             datas.put("replysubmit", "true");
             datas.put("noticetrimstr", noticetrimstr);
             Connection.Response res = Request.execute(params[0], "Mozilla", datas, (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.POST);
-
 
             statusCode = res.statusCode();
 

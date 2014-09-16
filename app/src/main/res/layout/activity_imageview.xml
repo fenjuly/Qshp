@@ -22,7 +22,5 @@
             ProgressWheel:spinSpeed="3dp"
             ProgressWheel:textColor="#222222"
             ProgressWheel:textSize="14sp" />
-
     </FrameLayout>
-
 </merge>

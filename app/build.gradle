@@ -24,9 +24,9 @@ android {
         }
     }
 
-    buildTypes{
+    buildTypes {
         release {
-            signingConfig  signingConfigs.release
+            signingConfig signingConfigs.release
             runProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }

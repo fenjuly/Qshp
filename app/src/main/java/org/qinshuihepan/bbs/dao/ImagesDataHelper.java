@@ -49,7 +49,6 @@ public class ImagesDataHelper extends BaseDataHelper {
         return image;
     }
 
-
     public ArrayList<Image> queryImages(long pid) {
         ArrayList<Image> images = null;
         Cursor cursor = query(null, ImagesDBInfo.PID + "=?",
@@ -88,18 +87,15 @@ public class ImagesDataHelper extends BaseDataHelper {
     }
 
     public static final class ImagesDBInfo implements BaseColumns {
-        private ImagesDBInfo() {
-        }
-
         public static final String TABLE_NAME = "images";
-
         public static final String PID = "pid";
-
         public static final String URL = "url";
-
         public static final SQLiteTable TABLE = new SQLiteTable(TABLE_NAME)
                 .addColumn(PID, Column.DataType.INTEGER)
                 .addColumn(URL, Column.DataType.TEXT);
+
+        private ImagesDBInfo() {
+        }
     }
 
 }

@@ -14,12 +14,13 @@ import android.view.View;
 
 import org.qinshuihepan.bbs.R;
 
-
 /**
  * Created by storm on 14-4-15.
  */
 public class ProgressWheel extends View {
 
+    int progress = 0;
+    boolean isSpinning = false;
     // Sizes (with defaults)
     private int layout_height = 0;
     private int layout_width = 0;
@@ -29,30 +30,25 @@ public class ProgressWheel extends View {
     private int barWidth = 20;
     private int rimWidth = 20;
     private int textSize = 20;
-
     // Padding (with defaults)
     private int paddingTop = 5;
     private int paddingBottom = 5;
     private int paddingLeft = 5;
     private int paddingRight = 5;
-
     // Colors (with defaults)
     private int barColor = 0xAA000000;
     private int circleColor = 0x00000000;
     private int rimColor = 0xAADDDDDD;
     private int textColor = 0xFF000000;
-
     // Paints
     private Paint barPaint = new Paint();
     private Paint circlePaint = new Paint();
     private Paint rimPaint = new Paint();
     private Paint textPaint = new Paint();
-
     // Rectangles
     @SuppressWarnings("unused")
     private RectF rectBounds = new RectF();
     private RectF circleBounds = new RectF();
-
     // Animation
     // The amount of pixels to move the bar by on each draw
     private int spinSpeed = 2;
@@ -76,9 +72,6 @@ public class ProgressWheel extends View {
             // super.handleMessage(msg);
         }
     };
-    int progress = 0;
-    boolean isSpinning = false;
-
     // Other
     private String text = "";
     private String[] splitText = {};

@@ -1,6 +1,5 @@
 package org.qinshuihepan.bbs.util;
 
-
 import org.qinshuihepan.bbs.App;
 import org.qinshuihepan.bbs.R;
 

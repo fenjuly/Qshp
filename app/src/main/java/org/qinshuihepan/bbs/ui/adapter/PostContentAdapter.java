@@ -7,12 +7,10 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import org.qinshuihepan.bbs.R;
 import org.qinshuihepan.bbs.dao.ItemsDataHelper;
 import org.qinshuihepan.bbs.model.BasePost;
-import org.qinshuihepan.bbs.model.Post;
 
 /**
  * Created by liurongchan on 14-5-2.
@@ -39,7 +37,6 @@ public class PostContentAdapter extends CursorAdapter {
         }
         return post;
     }
-
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {

@@ -31,13 +31,8 @@ public class MainActivity extends FragmentActivity {
 
     @InjectView(R.id.drawer_layout)
     FoldingDrawerLayout mDrawerLayout;
-
-    private ActionBarDrawerToggle mDrawerToggle;
-
-    private PostsFragment mContentFragment;
-
     String mCategory;
-
+    private ActionBarDrawerToggle mDrawerToggle;
     private int keyBackClickCount;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -56,9 +51,11 @@ public class MainActivity extends FragmentActivity {
 
     private void initActionBar() {
         ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(true);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(true);
+        }
     }
 
     @Override
@@ -102,7 +99,6 @@ public class MainActivity extends FragmentActivity {
 //        return false;
     }
 
-
     public void setCategory(String category) {
         mDrawerLayout.closeDrawer(GravityCompat.START);
         if (mCategory == category) {
@@ -110,7 +106,7 @@ public class MainActivity extends FragmentActivity {
         }
         mCategory = category;
         setTitle(mCategory);
-        mContentFragment = PostsFragment.newInstance(category);
+        PostsFragment mContentFragment = PostsFragment.newInstance(category);
         replaceFragment(R.id.content_frame, mContentFragment);
     }
 

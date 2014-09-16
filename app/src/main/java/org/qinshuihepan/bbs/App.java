@@ -15,14 +15,6 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 public class App extends Application {
     private static Context sContext;
 
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        sContext = getApplicationContext();
-        initImageLoader(getApplicationContext());
-    }
-
     public static Context getContext() {
         return sContext;
     }
@@ -36,5 +28,12 @@ public class App extends Application {
                 .tasksProcessingOrder(QueueProcessingType.LIFO)
                 .build();
         ImageLoader.getInstance().init(config);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        sContext = getApplicationContext();
+        initImageLoader(getApplicationContext());
     }
 }

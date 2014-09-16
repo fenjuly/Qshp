@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-
 /**
  * Created by liurongchan on 14-4-23.
  */
@@ -14,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final int VERSION = 1;
 
-    public  DBHelper(Context context) {
+    public DBHelper(Context context) {
         super(context, DB_NAME, null, VERSION);
     }
 
