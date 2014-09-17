@@ -91,7 +91,6 @@ public class LoginActivity extends Activity {
                 }
             }
         });
-
     }
 
     private boolean isLoginSuccess() {

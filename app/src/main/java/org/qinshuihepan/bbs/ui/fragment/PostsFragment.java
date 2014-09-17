@@ -167,8 +167,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                                         .getElementById("portal_block_22_content");
                                 break;
                         }
-                        for (Element portalBlockContent : portalBlockContents
-                                .getElementsByTag("li")) {
+                        for (Element portalBlockContent : portalBlockContents.getElementsByTag("li")) {
                             tid = Integer.valueOf(portalBlockContent.select("a[title]").attr("href").substring(52));
                             title = portalBlockContent.select("a[title]").attr("title");
                             post = new Post(tempCategoryID, tid, 0, title, "", "", haveimg, 0, author, null);
