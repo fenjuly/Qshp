@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.support.v4.content.CursorLoader;
-import android.widget.BaseAdapter;
 
 import org.qinshuihepan.bbs.model.BasePost;
 import org.qinshuihepan.bbs.util.database.Column;
@@ -82,30 +81,16 @@ public class ItemsDataHelper extends BaseDataHelper {
     }
 
     public static final class ItemsDBInfo implements BaseColumns {
-        private ItemsDBInfo() {
-        }
-
         public static final String TABLE_NAME = "items";
-
         public static final String FID = "fid";
-
         public static final String TID = "tid";
-
         public static final String PID = "pid";
-
         public static final String TITLE = "title";
-
         public static final String CONTENT = "content";
-
         public static final String TIME = "time";
-
         public static final String HAVEIMG = "haveimg";
-
         public static final String COMMENT_COUNT = "comment_count";
-
         public static final String AUTHOR = "author";
-
-
         public static final SQLiteTable TABLE = new SQLiteTable(TABLE_NAME)
                 .addColumn(FID, Column.DataType.INTEGER)
                 .addColumn(TID, Column.DataType.INTEGER)
@@ -116,6 +101,9 @@ public class ItemsDataHelper extends BaseDataHelper {
                 .addColumn(HAVEIMG, Column.DataType.INTEGER)
                 .addColumn(COMMENT_COUNT, Column.DataType.INTEGER)
                 .addColumn(AUTHOR, Column.DataType.TEXT);
+
+        private ItemsDBInfo() {
+        }
     }
 
 }

@@ -25,7 +25,6 @@ import org.qinshuihepan.bbs.dao.PostsDataHelper;
 import org.qinshuihepan.bbs.data.Request;
 import org.qinshuihepan.bbs.model.BasePost;
 import org.qinshuihepan.bbs.model.Post;
-import org.qinshuihepan.bbs.model.PostWithPic;
 import org.qinshuihepan.bbs.ui.adapter.CardsAnimationAdapter;
 import org.qinshuihepan.bbs.ui.adapter.PostsAdapter;
 import org.qinshuihepan.bbs.util.ActionBarUtils;
@@ -63,14 +62,21 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
     private int maxPage = 1;
     private boolean isloadmaxpage = false;
 
-
-
     public static PostsFragment newInstance(String category) {
         PostsFragment fragment = new PostsFragment();
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_CATEGORY, category);
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    private static boolean isNumeric(String str) {
+        for (int i = str.length(); --i >= 0; ) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -124,7 +130,6 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
         });
     }
 
-
     private void loadData(final int next) {
         if (!mSwipeLayout.isRefreshing() && (1 == next)) {
             mSwipeLayout.setRefreshing(true);
@@ -162,8 +167,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                                         .getElementById("portal_block_22_content");
                                 break;
                         }
-                        for (Element portalBlockContent : portalBlockContents
-                                .getElementsByTag("li")) {
+                        for (Element portalBlockContent : portalBlockContents.getElementsByTag("li")) {
                             tid = Integer.valueOf(portalBlockContent.select("a[title]").attr("href").substring(52));
                             title = portalBlockContent.select("a[title]").attr("title");
                             post = new Post(tempCategoryID, tid, 0, title, "", "", haveimg, 0, author, null);
@@ -280,7 +284,6 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                             }
                         }
 
-
                         mpDataHelper.bulkInsert(posts);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -301,7 +304,6 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
             });
         }
     }
-
 
     private void loadFirst() {
         mPage = 1;
@@ -336,7 +338,6 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
         mAdapter.changeCursor(null);
     }
 
-
     @Override
     public void onRefresh() {
         loadFirst();
@@ -346,14 +347,5 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
     public void onResume() {
         super.onResume();
         getLoaderManager().restartLoader(0, null, this);
-    }
-
-    private static boolean isNumeric(String str) {
-        for (int i = str.length(); --i >= 0; ) {
-            if (!Character.isDigit(str.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 }

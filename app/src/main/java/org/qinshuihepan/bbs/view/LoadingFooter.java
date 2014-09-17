@@ -8,24 +8,15 @@ import android.widget.TextView;
 
 import org.qinshuihepan.bbs.R;
 
-
 /**
  * Created by storm on 14-4-12.
  */
 public class LoadingFooter {
     protected View mLoadingFooter;
-
-    TextView mLoadingText;
-
-    ProgressBar mProgress;
-
     protected State mState = State.Idle;
-
+    TextView mLoadingText;
+    ProgressBar mProgress;
     private long mAnimationDuration;
-
-    public static enum State {
-        Idle, TheEnd, Loading
-    }
 
     public LoadingFooter(Context context) {
         mLoadingFooter = LayoutInflater.from(context).inflate(R.layout.loading_footer, null);
@@ -48,15 +39,6 @@ public class LoadingFooter {
 
     public State getState() {
         return mState;
-    }
-
-    public void setState(final State state, long delay) {
-        mLoadingFooter.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                setState(state);
-            }
-        }, delay);
     }
 
     public void setState(State status) {
@@ -83,5 +65,18 @@ public class LoadingFooter {
                 mLoadingFooter.setVisibility(View.GONE);
                 break;
         }
+    }
+
+    public void setState(final State state, long delay) {
+        mLoadingFooter.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setState(state);
+            }
+        }, delay);
+    }
+
+    public static enum State {
+        Idle, TheEnd, Loading
     }
 }

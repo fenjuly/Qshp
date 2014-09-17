@@ -23,7 +23,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 /**
  * Created by liurongchan on 14-5-7.
  */
-public class ImageViewActivity extends FragmentActivity{
+public class ImageViewActivity extends FragmentActivity {
     public static final String IMAGE_URL = "image_url";
 
     @InjectView(R.id.photoView)

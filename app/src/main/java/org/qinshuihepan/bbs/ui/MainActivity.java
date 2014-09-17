@@ -1,9 +1,12 @@
 package org.qinshuihepan.bbs.ui;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -18,7 +21,7 @@ import org.qinshuihepan.bbs.R;
 import org.qinshuihepan.bbs.ui.fragment.DrawerFragment;
 import org.qinshuihepan.bbs.ui.fragment.PostsFragment;
 import org.qinshuihepan.bbs.util.Utils;
-import org.qinshuihepan.bbs.util.update.UpdateChecker;
+import org.qinshuihepan.bbs.util.update.NetChecker;
 import org.qinshuihepan.bbs.view.FoldingDrawerLayout;
 
 import java.util.Timer;
@@ -32,13 +35,9 @@ public class MainActivity extends FragmentActivity {
     @InjectView(R.id.drawer_layout)
     FoldingDrawerLayout mDrawerLayout;
 
-    private ActionBarDrawerToggle mDrawerToggle;
-
-    private PostsFragment mContentFragment;
-
     String mCategory;
-
-    private int keyBackClickCount;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private int mKeyBackClickCount;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,9 +55,11 @@ public class MainActivity extends FragmentActivity {
 
     private void initActionBar() {
         ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(true);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(true);
+        }
     }
 
     @Override
@@ -99,26 +100,39 @@ public class MainActivity extends FragmentActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-//        return false;
     }
-
 
     public void setCategory(String category) {
         mDrawerLayout.closeDrawer(GravityCompat.START);
-        if (mCategory == category) {
+        if (mCategory != null && mCategory.equals(category)) {
             return;
         }
         mCategory = category;
         setTitle(mCategory);
-        mContentFragment = PostsFragment.newInstance(category);
-        replaceFragment(R.id.content_frame, mContentFragment);
+        if (NetChecker.checkNetworkConnection(this)) {
+            PostsFragment mContentFragment = PostsFragment.newInstance(category);
+            replaceFragment(R.id.content_frame, mContentFragment);
+        } else {
+            new AlertDialog.Builder(this).setTitle("网络未连接").setMessage("设置完成后请尝试手动刷新")
+                    .setPositiveButton("设置", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(
+                                DialogInterface paramDialogInterface,
+                                int paramInt) {
+                            Intent intentToNetwork = new Intent(
+                                    Settings.ACTION_SETTINGS);
+                            paramDialogInterface.cancel();
+                            MainActivity.this.startActivity(intentToNetwork);
+                        }
+                    }).setNegativeButton("取消", null).show();
+        }
     }
 
     // 双击返回键退出
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            switch (keyBackClickCount++) {
+            switch (mKeyBackClickCount++) {
                 case 0:
                     Toast.makeText(this, R.string.press_again_to_exit,
                             Toast.LENGTH_SHORT).show();
@@ -126,7 +140,7 @@ public class MainActivity extends FragmentActivity {
                     timer.schedule(new TimerTask() {
                         @Override
                         public void run() {
-                            keyBackClickCount = 0;
+                            mKeyBackClickCount = 0;
                         }
                     }, 3000);
                     break;
@@ -136,7 +150,7 @@ public class MainActivity extends FragmentActivity {
                     break;
 
                 default:
-                    keyBackClickCount = 0;
+                    mKeyBackClickCount = 0;
                     break;
             }
             return true;

@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 import org.qinshuihepan.bbs.App;
 import org.qinshuihepan.bbs.R;
 import org.qinshuihepan.bbs.util.Utils;
@@ -22,7 +21,6 @@ import butterknife.InjectView;
 public class DrawerAdapter extends BaseAdapter {
 
     private ListView mListView;
-
 
     public DrawerAdapter(ListView listView, Context context) {
         mListView = listView;
@@ -54,15 +52,6 @@ public class DrawerAdapter extends BaseAdapter {
         return convertView;
     }
 
-    static class Holder {
-        @InjectView(R.id.textView)
-        TextView category;
-
-        public Holder(View convertView) {
-            ButterKnife.inject(this, convertView);
-        }
-    }
-
     private Holder getHolder(final View convertView) {
         Holder holder = (Holder) convertView.getTag();
         if (holder == null) {
@@ -70,6 +59,15 @@ public class DrawerAdapter extends BaseAdapter {
             convertView.setTag(holder);
         }
         return holder;
+    }
+
+    static class Holder {
+        @InjectView(R.id.textView)
+        TextView category;
+
+        public Holder(View convertView) {
+            ButterKnife.inject(this, convertView);
+        }
     }
 
 }

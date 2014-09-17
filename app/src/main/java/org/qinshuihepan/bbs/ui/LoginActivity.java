@@ -33,17 +33,13 @@ import butterknife.InjectView;
  */
 public class LoginActivity extends Activity {
 
-    private Context mContext;
-
     @InjectView(R.id.username)
     public EditText usernameText;
-
     @InjectView(R.id.password)
     public EditText passwordText;
-
     @InjectView(R.id.confirm)
     public CircularProgressButton confirm;
-
+    private Context mContext;
     private String username;
     private String password;
 
@@ -79,14 +75,13 @@ public class LoginActivity extends Activity {
                         protected void onPostExecute(Boolean success) {
                             super.onPostExecute(success);
                             if (!success) {
+                                confirm.setIdleText("认证失败,请重试！");
                                 confirm.setProgress(0);
-                                Toast.makeText(mContext, "用户名或密码错误!", Toast.LENGTH_SHORT)
-                                        .show();
-                                usernameText.setText("");
                                 passwordText.setText("");
+                                usernameText.setText("");
+                                usernameText.requestFocus();
                             } else {
-                                Toast.makeText(mContext, "登录成功!", Toast.LENGTH_SHORT)
-                                        .show();
+                                confirm.setProgress(100);
                                 Intent intent = new Intent(mContext, MainActivity.class);
                                 mContext.startActivity(intent);
                                 finish();
@@ -96,7 +91,6 @@ public class LoginActivity extends Activity {
                 }
             }
         });
-
     }
 
     private boolean isLoginSuccess() {

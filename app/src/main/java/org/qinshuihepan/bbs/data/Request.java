@@ -11,12 +11,11 @@ import java.util.Map;
  */
 public class Request {
 
-
     public static Connection.Response execute(String url, String agent, Map<String, String> datas, Map<String, String> cookies, Connection.Method method) {
         Connection.Response response = null;
         try {
             response =
-                    Jsoup.connect(url).userAgent(agent).timeout(10*1000).data(datas).cookies(cookies).method(method).execute();
+                    Jsoup.connect(url).userAgent(agent).timeout(10 * 1000).data(datas).cookies(cookies).method(method).execute();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -27,7 +26,7 @@ public class Request {
         Connection.Response response = null;
         try {
             response =
-                    Jsoup.connect(url).userAgent(agent).timeout(10*1000).method(method).execute();
+                    Jsoup.connect(url).userAgent(agent).timeout(10 * 1000).method(method).execute();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,7 +37,7 @@ public class Request {
         Connection.Response response = null;
         try {
             response =
-                    Jsoup.connect(url).userAgent(agent).timeout(10*1000).cookies(cookies).method(method).execute();
+                    Jsoup.connect(url).userAgent(agent).timeout(10 * 1000).cookies(cookies).method(method).execute();
         } catch (IOException e) {
             e.printStackTrace();
         }

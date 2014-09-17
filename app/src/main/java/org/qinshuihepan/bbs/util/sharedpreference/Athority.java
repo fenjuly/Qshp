@@ -19,7 +19,6 @@ public class Athority {
 
     private static SharedPreferences mShared;
 
-
     public static SharedPreferences getSharedPreference() {
         if (mShared == null) {
             mShared = App.getContext().getSharedPreferences(ACCOUNT_INFORMATION, Context.MODE_PRIVATE);

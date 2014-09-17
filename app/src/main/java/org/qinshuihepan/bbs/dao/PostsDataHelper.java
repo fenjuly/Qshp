@@ -4,7 +4,6 @@ package org.qinshuihepan.bbs.dao;
  * Created by liurongchan on 14-4-23.
  */
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -83,30 +82,16 @@ public class PostsDataHelper extends BaseDataHelper {
     }
 
     public static final class PostsDBInfo implements BaseColumns {
-        private PostsDBInfo() {
-        }
-
         public static final String TABLE_NAME = "posts";
-
         public static final String FID = "fid";
-
         public static final String TID = "tid";
-
         public static final String PID = "pid";
-
         public static final String TITLE = "title";
-
         public static final String CONTENT = "content";
-
         public static final String TIME = "time";
-
         public static final String HAVEIMG = "haveimg";
-
         public static final String COMMENT_COUNT = "comment_count";
-
         public static final String AUTHOR = "author";
-
-
         public static final SQLiteTable TABLE = new SQLiteTable(TABLE_NAME)
                 .addColumn(FID, Column.DataType.INTEGER)
                 .addColumn(TID, Column.DataType.INTEGER)
@@ -117,8 +102,10 @@ public class PostsDataHelper extends BaseDataHelper {
                 .addColumn(HAVEIMG, Column.DataType.INTEGER)
                 .addColumn(COMMENT_COUNT, Column.DataType.INTEGER)
                 .addColumn(AUTHOR, Column.DataType.TEXT);
-    }
 
+        private PostsDBInfo() {
+        }
+    }
 
 }
 

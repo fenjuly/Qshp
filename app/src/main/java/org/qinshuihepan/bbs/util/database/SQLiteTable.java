@@ -13,10 +13,6 @@ public class SQLiteTable {
 
     ArrayList<Column> mColumnsDefinitions = new ArrayList<Column>();
 
-    public String getTableName() {
-        return mTableName;
-    }
-
     /**
      * 会自动添加主键 BaseColumns._ID
      *
@@ -26,6 +22,10 @@ public class SQLiteTable {
         mTableName = tableName;
         mColumnsDefinitions.add(new Column(BaseColumns._ID, Column.Constraint.PRIMARY_KEY,
                 Column.DataType.INTEGER));
+    }
+
+    public String getTableName() {
+        return mTableName;
     }
 
     public SQLiteTable addColumn(Column columnsDefinition) {

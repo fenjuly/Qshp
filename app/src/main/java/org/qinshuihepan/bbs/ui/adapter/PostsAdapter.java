@@ -12,10 +12,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 import org.qinshuihepan.bbs.R;
 import org.qinshuihepan.bbs.model.BasePost;
-import org.qinshuihepan.bbs.ui.MainActivity;
 import org.qinshuihepan.bbs.ui.PostContentActivity;
 
 import butterknife.ButterKnife;
@@ -31,7 +29,6 @@ public class PostsAdapter extends CursorAdapter {
     private LayoutInflater mLayoutInflater;
 
     private ListView mListView;
-
 
     public PostsAdapter(Context context, ListView listView) {
         super(context, null, false);

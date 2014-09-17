@@ -1,47 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">清水河畔</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-
-
     <string name="loading">Loading...</string>
     <string name="the_end">TheEnd</string>
-
-
     <!-- Load -->
-
     <string name="center_text">正在载入数据，请稍等</string>
     <string name="bottom_text">newfenjuly@gmail.com</string>
-
     <!-- MainForum head text -->
     <string name="newestreply">最新回复</string>
     <string name="newestpublish">最新发表</string>
     <string name="todayhot">今日热门</string>
     <string name="accountmanage">切换帐号</string>
-
     <!-- Login EditText Hint -->
     <string name="username">帐号</string>
     <string name="password">密码</string>
     <string name="confirm">登陆新账号</string>
-
-
-
     <!-- else -->
     <string name="view_big_image">查看大图</string>
     <string name="view_post">本帖内容</string>
-
-
     <!-- The id of secondary forum -->
-
     <string name="最新回复">10001</string>
     <string name="最新发表">10002</string>
     <string name="今日热门">10003</string>
-
     <string name="保研考研">199</string>
     <string name="LaTeX技术交流">308</string>
     <string name="聚焦两会">277</string>
@@ -102,13 +87,9 @@
     <string name="动漫资源">128</string>
     <string name="软件资源">252</string>
     <string name="音乐资源">229</string>
-
-
-
     <string name="newUpdateAvailable">发现新版本</string>
     <string name="download_success">下载完成，点击安装</string>
     <string name="app_no_new_update">没有发现新版本</string>
     <string name="download_progress">正在下载:%1$d%%</string>
     <string name="press_again_to_exit">再按一次退出～</string>
-
 </resources>

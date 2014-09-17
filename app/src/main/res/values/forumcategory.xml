@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string-array name="forumcategory">
         <item>最新发表</item>
         <item>最新回复</item>
         <item>今日热门</item>
-
         <item>LaTeX技术交流 </item>
         <item>镜头下的成电</item>
         <item>一周锐评</item>
@@ -64,8 +62,5 @@
         <item>动漫资源</item>
         <item>软件资源</item>
         <item>音乐资源</item>
-
-
     </string-array>
-
 </resources>

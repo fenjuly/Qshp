@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -35,13 +34,27 @@ public class BasePost {
     public static final String ITEM = "item";
 
     private static ImagesDataHelper miDataHelper = new ImagesDataHelper(App.getContext());
-
-    public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-        return null;
-    }
-
-    public BasePost getItem(int position) {
-        return null;
+    public int fid;
+    public int tid;
+    public int pid;
+    public String title;
+    public String content;
+    public String time;
+    public int haveimg;
+    public int comment_count;
+    public String author;
+    public ArrayList<Image> images;
+    public BasePost(int fid, int tid, int pid, String title, String content, String time, int haveimg, int comment_count, String author, ArrayList<Image> images) {
+        this.fid = fid;
+        this.tid = tid;
+        this.pid = pid;
+        this.title = title;
+        this.content = content;
+        this.time = time;
+        this.haveimg = haveimg;
+        this.comment_count = comment_count;
+        this.author = author;
+        this.images = images;
     }
 
     public static void bindView(View view, Context context, Cursor cursor, int type) {
@@ -69,7 +82,7 @@ public class BasePost {
     }
 
     public static BasePost fromCursor(Cursor cursor, String type) {
-        BasePost post = null ;
+        BasePost post = null;
         ArrayList<Image> images = null;
         if (type.equals(POST)) {
             int tid = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.TID));
@@ -87,7 +100,7 @@ public class BasePost {
             int comment_count = cursor.getInt(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.COMMENT_COUNT));
             String author = cursor.getString(cursor.getColumnIndex(PostsDataHelper.PostsDBInfo.AUTHOR));
 
-                post = new Post(fid, tid, pid, title, content, time, haveimg, comment_count, author, images);
+            post = new Post(fid, tid, pid, title, content, time, haveimg, comment_count, author, images);
             addToCache(post, type);
         } else {
             int pid = cursor.getInt(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.PID));
@@ -107,7 +120,6 @@ public class BasePost {
             int comment_count = cursor.getInt(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.COMMENT_COUNT));
             String author = cursor.getString(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.AUTHOR));
 
-
             if (haveimg == NOIMG) {
                 post = new Post(fid, tid, pid, title, content, time, haveimg, comment_count, author, images);
             } else {
@@ -120,48 +132,29 @@ public class BasePost {
         return post;
     }
 
-    public BasePost(int fid, int tid, int pid, String title, String content, String time, int haveimg, int comment_count, String author, ArrayList<Image> images) {
-        this.fid = fid;
-        this.tid = tid;
-        this.pid = pid;
-        this.title = title;
-        this.content = content;
-        this.time = time;
-        this.haveimg = haveimg;
-        this.comment_count = comment_count;
-        this.author = author;
-        this.images = images;
-    }
-
-    public int fid;
-    public int tid;
-    public int pid;
-    public String title;
-    public String content;
-    public String time;
-    public int haveimg;
-    public int comment_count;
-    public String author;
-    public ArrayList<Image> images;
-
-
     public static Holder getHolder(final View view) {
         Holder holder = (Holder) view.getTag();
         if (holder == null) {
             holder = new Holder(view);
             view.setTag(holder);
-        }  else {
+        } else {
             holder.layout.removeAllViews();
         }
         return holder;
     }
 
+    public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
+        return null;
+    }
+
+    public BasePost getItem(int position) {
+        return null;
+    }
 
     static class Holder {
 
         @InjectView(R.id.author)
         TextView author;
-
 
         @InjectView(R.id.time)
         TextView time;

@@ -68,67 +68,42 @@ public class BaseFoldingLayout extends ViewGroup {
 	 * logic when running with this workaround."
 	 */
 
-    public static enum Orientation {
-        VERTICAL, HORIZONTAL
-    }
-
-    public interface OnFoldListener {
-        public void onStartFold();
-
-        public void onEndFold();
-    }
-
     private final String FOLDING_VIEW_EXCEPTION_MESSAGE = "Folding Layout can only 1 child at "
             + "most";
-
     private final float SHADING_ALPHA = 0.8f;
     private final float SHADING_FACTOR = 0.5f;
     private final int DEPTH_CONSTANT = 1500;
     private final int NUM_OF_POLY_POINTS = 8;
-
+    protected Orientation mOrientation = Orientation.HORIZONTAL;
+    protected float mAnchorFactor = 0;
     private Rect[] mFoldRectArray;
 
     private Matrix[] mMatrix;
-
-    protected Orientation mOrientation = Orientation.HORIZONTAL;
-
-    protected float mAnchorFactor = 0;
     private float mFoldFactor = 0;
-
     private int mNumberOfFolds = 2;
-
     private boolean mIsHorizontal = true;
-
     private int mOriginalWidth = 0;
     private int mOriginalHeight = 0;
-
     private float mFoldMaxWidth = 0;
     private float mFoldMaxHeight = 0;
     private float mFoldDrawWidth = 0;
     private float mFoldDrawHeight = 0;
-
     private boolean mIsFoldPrepared = false;
     private boolean mShouldDraw = true;
-
     private Paint mSolidShadow;
     private Paint mGradientShadow;
     private LinearGradient mShadowLinearGradient;
     private Matrix mShadowGradientMatrix;
-
     private float[] mSrc;
     private float[] mDst;
-
     private OnFoldListener mFoldListener;
-
     private float mPreviousFoldFactor = 0;
-
     private Bitmap mFullBitmap;
     private Rect mDstRect;
 
     public BaseFoldingLayout(Context context) {
         super(context);
     }
-
     public BaseFoldingLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
@@ -183,22 +158,6 @@ public class BaseFoldingLayout extends ViewGroup {
     }
 
     /**
-     * The custom exception to be thrown so as to limit the number of views in
-     * this layout to at most one.
-     */
-    private class NumberOfFoldingLayoutChildrenException extends
-            RuntimeException {
-        /**
-         *
-         */
-        private static final long serialVersionUID = 1L;
-
-        public NumberOfFoldingLayoutChildrenException(String message) {
-            super(message);
-        }
-    }
-
-    /**
      * Throws an exception if the number of views added to this layout exceeds
      * one.
      */
@@ -211,6 +170,32 @@ public class BaseFoldingLayout extends ViewGroup {
 
     public void setFoldListener(OnFoldListener foldListener) {
         mFoldListener = foldListener;
+    }
+
+    public float getAnchorFactor() {
+        return mAnchorFactor;
+    }
+
+    public void setAnchorFactor(float anchorFactor) {
+        if (anchorFactor != mAnchorFactor) {
+            mAnchorFactor = anchorFactor;
+            updateFold();
+        }
+    }
+
+    public Orientation getOrientation() {
+        return mOrientation;
+    }
+
+    public void setOrientation(Orientation orientation) {
+        if (orientation != mOrientation) {
+            mOrientation = orientation;
+            updateFold();
+        }
+    }
+
+    public float getFoldFactor() {
+        return mFoldFactor;
     }
 
     /**
@@ -226,19 +211,8 @@ public class BaseFoldingLayout extends ViewGroup {
         }
     }
 
-
-    public void setOrientation(Orientation orientation) {
-        if (orientation != mOrientation) {
-            mOrientation = orientation;
-            updateFold();
-        }
-    }
-
-    public void setAnchorFactor(float anchorFactor) {
-        if (anchorFactor != mAnchorFactor) {
-            mAnchorFactor = anchorFactor;
-            updateFold();
-        }
+    public int getNumberOfFolds() {
+        return mNumberOfFolds;
     }
 
     public void setNumberOfFolds(int numberOfFolds) {
@@ -246,22 +220,6 @@ public class BaseFoldingLayout extends ViewGroup {
             mNumberOfFolds = numberOfFolds;
             updateFold();
         }
-    }
-
-    public float getAnchorFactor() {
-        return mAnchorFactor;
-    }
-
-    public Orientation getOrientation() {
-        return mOrientation;
-    }
-
-    public float getFoldFactor() {
-        return mFoldFactor;
-    }
-
-    public int getNumberOfFolds() {
-        return mNumberOfFolds;
     }
 
     private void updateFold() {
@@ -338,7 +296,7 @@ public class BaseFoldingLayout extends ViewGroup {
                 / ((float) mNumberOfFolds));
 
 		/*
-		 * Loops through the number of folds and segments the full layout into a
+         * Loops through the number of folds and segments the full layout into a
 		 * number of smaller equal components. If the number of folds is odd,
 		 * then one of the components will be smaller than all the rest. Note
 		 * that deltap below handles the calculation for an odd number of folds.
@@ -640,6 +598,32 @@ public class BaseFoldingLayout extends ViewGroup {
             }
 
             canvas.restore();
+        }
+    }
+
+    public static enum Orientation {
+        VERTICAL, HORIZONTAL
+    }
+
+    public interface OnFoldListener {
+        public void onStartFold();
+
+        public void onEndFold();
+    }
+
+    /**
+     * The custom exception to be thrown so as to limit the number of views in
+     * this layout to at most one.
+     */
+    private class NumberOfFoldingLayoutChildrenException extends
+            RuntimeException {
+        /**
+         *
+         */
+        private static final long serialVersionUID = 1L;
+
+        public NumberOfFoldingLayoutChildrenException(String message) {
+            super(message);
         }
     }
 

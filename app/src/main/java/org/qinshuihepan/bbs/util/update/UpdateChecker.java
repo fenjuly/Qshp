@@ -46,7 +46,7 @@ public class UpdateChecker extends Fragment {
      * FragmentActivity Specify the number of checks after the notification will
      * be shown.
      *
-     * @param fragmentActivity      Required.
+     * @param fragmentActivity Required.
      */
     public static void checkForNotification(FragmentActivity fragmentActivity) {
         FragmentTransaction content = fragmentActivity
@@ -56,6 +56,22 @@ public class UpdateChecker extends Fragment {
         args.putInt(NOTICE_TYPE_KEY, NOTICE_NOTIFICATION);
         updateChecker.setArguments(args);
         content.add(updateChecker, null).commit();
+    }
+
+    /**
+     * Check if a network available
+     */
+    public static boolean isNetworkAvailable(Context context) {
+        boolean connected = false;
+        ConnectivityManager cm = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm != null) {
+            NetworkInfo ni = cm.getActiveNetworkInfo();
+            if (ni != null) {
+                connected = ni.isConnected();
+            }
+        }
+        return connected;
     }
 
     /**
@@ -182,7 +198,6 @@ public class UpdateChecker extends Fragment {
 
     /**
      * Show Notification
-     *
      */
     public void showNotification(String content, String apkUrl) {
         Notification noti;
@@ -203,22 +218,6 @@ public class UpdateChecker extends Fragment {
         NotificationManager notificationManager = (NotificationManager) mContext
                 .getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, noti);
-    }
-
-    /**
-     * Check if a network available
-     */
-    public static boolean isNetworkAvailable(Context context) {
-        boolean connected = false;
-        ConnectivityManager cm = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm != null) {
-            NetworkInfo ni = cm.getActiveNetworkInfo();
-            if (ni != null) {
-                connected = ni.isConnected();
-            }
-        }
-        return connected;
     }
 
 }
