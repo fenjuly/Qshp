@@ -22,6 +22,7 @@ import org.qinshuihepan.bbs.ui.fragment.DrawerFragment;
 import org.qinshuihepan.bbs.ui.fragment.PostsFragment;
 import org.qinshuihepan.bbs.util.Utils;
 import org.qinshuihepan.bbs.util.update.NetChecker;
+import org.qinshuihepan.bbs.util.update.UpdateChecker;
 import org.qinshuihepan.bbs.view.FoldingDrawerLayout;
 
 import java.util.Timer;
