@@ -97,6 +97,7 @@ public class MainActivity extends FragmentActivity {
                 finish();
                 return true;
             case R.id.myposts:
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ import org.qinshuihepan.bbs.view.PageListView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.ButterKnife;
@@ -153,6 +155,20 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                         int tid = 0;
                         String author = "";
                         BasePost post;
+                        if (Athority.getSharedPreference().getString(Athority.HAVE_UID, "no").equals("no")) {
+                            Map<String, String> user_info = new HashMap<String, String>();
+                            Elements ys = doc.getElementsByClass("y");
+                            for(Element y : ys) {
+                                for (Element a : y.getElementsByTag("a") ) {
+                                    String start = "http://bbs.stuhome.net/home.php?mod=space  uid=";
+                                    String uid = a.attr("href").substring(start.length() - 1);
+                                    user_info.put("uid", uid);
+                                    break;
+                                }
+                                break;
+                            }
+                            Athority.addOther(Athority.HAVE_UID, "yes");
+                        }
                         switch (tempCategoryID) {
                             case 10002:
                                 portalBlockContents = doc
@@ -203,7 +219,6 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                     }
                     try {
                         Connection.Response response = Request.execute(String.format(Api.POSTS, App.getContext().getResources().getString(Integer.valueOf(Utils.FORUM_CATEGORY_ID.get(mCategory))), next), "Mozilla", (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
-                        System.out.println(String.format(Api.POSTS, App.getContext().getResources().getString(Integer.valueOf(Utils.FORUM_CATEGORY_ID.get(mCategory))), next));
                         doc = response.parse();
                         Elements tbodies = doc.getElementsByTag("tbody");
                         String str_tid = "";

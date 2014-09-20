@@ -17,6 +17,8 @@ public class Athority {
 
     public static final String PREF_HAS_LOGINED = "has_logined";
 
+    public static final String HAVE_UID = "have_uid";
+
     private static SharedPreferences mShared;
 
     public static SharedPreferences getSharedPreference() {

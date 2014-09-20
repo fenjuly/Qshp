@@ -21,6 +21,8 @@ public class Api {
 
     public static final String REPLY_SINGLE = HOST + "forum.php?mod=post&infloat=yes&action=reply&fid=" + "%1$s" + "&extra=page&tid=" + "%2$s" + "&replysubmit=yes&inajax=1";
 
+    public static final String MY_POSTS = HOST + "home.php?mod=space&uid=" + "%1$s" + "&do=thread&view=me&from=space"; //paramter: uid
+
     //Mobile API
     public static final String MOBILE_COOKIE_LOGIN = HOST + "member.php?mod=logging&action=login&mobile=1";
 }

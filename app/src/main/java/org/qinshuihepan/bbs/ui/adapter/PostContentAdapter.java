@@ -35,6 +35,7 @@ public class PostContentAdapter extends CursorAdapter {
         } else {
             type = 1;
         }
+
         return post;
     }
 

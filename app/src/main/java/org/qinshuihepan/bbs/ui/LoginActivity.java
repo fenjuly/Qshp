@@ -81,6 +81,7 @@ public class LoginActivity extends Activity {
                                 usernameText.setText("");
                                 usernameText.requestFocus();
                             } else {
+                                Athority.addOther("username", username);
                                 confirm.setProgress(100);
                                 Intent intent = new Intent(mContext, MainActivity.class);
                                 mContext.startActivity(intent);
