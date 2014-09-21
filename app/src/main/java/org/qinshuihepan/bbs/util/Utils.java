@@ -12,6 +12,8 @@ public class Utils {
 
     public static final String FORUM_CATEGORY[] = App.getContext().getResources().getStringArray(R.array.forumcategory);
 
+    public static final String PERSONAL_CENTER[] = App.getContext().getResources().getStringArray(R.array.personalcenter);
+
     public static final HashMap<String, Integer> FORUM_CATEGORY_ID = new HashMap<String, Integer>() {
         /**
          *
