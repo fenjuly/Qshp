@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -158,8 +157,8 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                         if (Athority.getSharedPreference().getString(Athority.HAVE_UID, "no").equals("no")) {
                             Map<String, String> user_info = new HashMap<String, String>();
                             Elements ys = doc.getElementsByClass("y");
-                            for(Element y : ys) {
-                                for (Element a : y.getElementsByTag("a") ) {
+                            for (Element y : ys) {
+                                for (Element a : y.getElementsByTag("a")) {
                                     String start = "http://bbs.stuhome.net/home.php?mod=space  uid=";
                                     String uid = a.attr("href").substring(start.length() - 1);
                                     user_info.put("uid", uid);

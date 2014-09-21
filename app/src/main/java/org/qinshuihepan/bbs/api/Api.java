@@ -25,4 +25,6 @@ public class Api {
 
     //Mobile API
     public static final String MOBILE_COOKIE_LOGIN = HOST + "member.php?mod=logging&action=login&mobile=1";
+
+    public static final String MOBILE_SEARCH = HOST + "search.php?mod=forum&searchid=1801&orderby=lastpost&ascdesc=desc&searchsubmit=yes&kw=" + "%1$s" + "&mobile=2"; //paramter: keyword
 }

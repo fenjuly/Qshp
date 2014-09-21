@@ -3,36 +3,36 @@
         android:id="@+id/myposts"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="我的帖子" />
+        android:title="我的帖子"/>
     <item
         android:id="@+id/myrelpy"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="我的回复" />
+        android:title="我的回复"/>
     <item
         android:id="@+id/setting"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="个性设置" />
+        android:title="个性设置"/>
     <item
         android:id="@+id/profile"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="个反馈意见" />
+        android:title="反馈意见"/>
     <item
         android:id="@+id/changeAcount"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="切换帐号" />
+        android:title="切换帐号"/>
     />
     <item
         android:id="@+id/search"
-        android:icon="@drawable/u11"
         android:showAsAction="always"
-        android:title="搜索帖子" />
+        android:title="搜索帖子"
+        android:actionViewClass="android.widget.SearchView"/>
     <item
         android:id="@+id/new_post"
         android:icon="@drawable/u13"
         android:showAsAction="always"
-        android:title="发表帖子" />
+        android:title="发表帖子"/>
 </menu>
