@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="personalcenter">
+        <item>我的帖子</item>
+        <item>我的回复</item>
+        <item>我的消息</item>
+        <item>个人资料</item>
+        <item>个人资料</item>
+        <item>个人资料</item>
+        <item>个人资料</item>
+        <item>个人资料</item>
+    </string-array>
+</resources>

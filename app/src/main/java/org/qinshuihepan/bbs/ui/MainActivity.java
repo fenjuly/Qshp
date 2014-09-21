@@ -94,10 +94,9 @@ public class MainActivity extends FragmentActivity {
         switch (item.getItemId()) {
             case R.id.changeAcount:
                 startActivity(new Intent(this, LoginActivity.class));
-                finish();
-                return true;
+                finish();                return true;
             case R.id.myposts:
-
+                startActivity(new Intent(this, PersonalCenter.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

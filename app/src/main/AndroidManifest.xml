@@ -25,6 +25,7 @@
         <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.PostContentActivity" />
         <activity android:name=".ui.ImageViewActivity" />
+        <activity android:name=".ui.PersonalCenter" />
         <activity
             android:name=".ui.LoginActivity"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar"
