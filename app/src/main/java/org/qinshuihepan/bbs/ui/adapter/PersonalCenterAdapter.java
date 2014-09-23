@@ -9,7 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import org.qinshuihepan.bbs.R;
+import org.qinshuihepan.bbs.ui.MyCollectionActivity;
+import org.qinshuihepan.bbs.ui.MyMessageActivity;
 import org.qinshuihepan.bbs.ui.MyPostsActivity;
+import org.qinshuihepan.bbs.ui.ProfileActivity;
 import org.qinshuihepan.bbs.util.Utils;
 
 import butterknife.ButterKnife;
@@ -59,8 +62,21 @@ public class PersonalCenterAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (position == 0) {
-                    mContext.startActivity(new Intent(mContext, MyPostsActivity.class));
+                switch (position) {
+                    case 0 :
+                        mContext.startActivity(new Intent(mContext, MyPostsActivity.class));
+                        break;
+                    case 1 :
+                        mContext.startActivity(new Intent(mContext, MyMessageActivity.class));
+                        break;
+                    case 2 :
+                        mContext.startActivity(new Intent(mContext, MyCollectionActivity.class));
+                        break;
+                    case 4 :
+                        mContext.startActivity(new Intent(mContext, ProfileActivity.class));
+                        break;
+                    default:
+                        break;
                 }
             }
         });

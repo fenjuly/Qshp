@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#3ff7"
+    android:layout_height="70dp"
+    android:background="@drawable/listitem_post_selector"
     android:orientation="vertical" >
 
     <TextView
+        android:layout_marginTop="8dp"
         android:id="@+id/option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:textAppearance="@android:style/TextAppearance.Medium" />
     <ImageView
+        android:layout_marginTop="8dp"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentRight="true"

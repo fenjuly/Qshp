@@ -28,4 +28,8 @@ public class Api {
     public static final String MOBILE_SEARCH = HOST + "search.php?mod=forum&searchid=1801&orderby=lastpost&ascdesc=desc&searchsubmit=yes&kw=" + "%1$s" + "&mobile=2"; //paramter: keyword
 
     public static final String MY_POSTS = HOST + "home.php?mod=space&uid=" + "%1$s" + "&do=thread&view=me&mobile=1"; //paramter: uid
+
+    public static final String MY_COLLECTIONS = HOST + "home.php?mod=space&uid" + "%1$s" + "&do=favorite&view=me&type=thread&mobile=2";  //paramter: uid
+
+    public static final String MY_MESSAGES = HOST + "bbs.stuhome.net/home.php?mod=space&do=pm&mobile=1&filter=privatepm";
 }

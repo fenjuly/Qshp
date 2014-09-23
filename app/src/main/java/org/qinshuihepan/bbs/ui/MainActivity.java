@@ -103,7 +103,7 @@ public class MainActivity extends FragmentActivity {
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();                return true;
             case R.id.myposts:
-                startActivity(new Intent(this, PersonalCenter.class));
+                startActivity(new Intent(this, PersonalCenterActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
