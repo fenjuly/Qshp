@@ -1,6 +1,7 @@
 package org.qinshuihepan.bbs.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import org.qinshuihepan.bbs.R;
+import org.qinshuihepan.bbs.ui.MyPostsActivity;
 import org.qinshuihepan.bbs.util.Utils;
 
 import butterknife.ButterKnife;
@@ -41,7 +43,7 @@ public class PersonalCenterAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
+    public View getView(final int position, View view, ViewGroup viewGroup) {
         TextView option;
         Holder holder;
         if(view == null) {
@@ -54,6 +56,14 @@ public class PersonalCenterAdapter extends BaseAdapter {
             option = holder.option;
         }
         option.setText(personal_items[position]);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (position == 0) {
+                    mContext.startActivity(new Intent(mContext, MyPostsActivity.class));
+                }
+            }
+        });
         return view;
     }
 

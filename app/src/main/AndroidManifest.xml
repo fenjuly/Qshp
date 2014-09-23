@@ -35,6 +35,7 @@
         </activity>
         <activity android:name="org.qinshuihepan.bbs.ui.PostContentActivity"/>
         <activity android:name="org.qinshuihepan.bbs.ui.ImageViewActivity"/>
+        <activity android:name=".ui.MyPostsActivity"/>
         <activity
             android:name="org.qinshuihepan.bbs.ui.LoginActivity"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar"
