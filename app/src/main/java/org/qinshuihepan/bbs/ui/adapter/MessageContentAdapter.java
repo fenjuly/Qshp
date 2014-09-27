@@ -72,8 +72,6 @@ public class MessageContentAdapter extends BaseAdapter {
         @InjectView(R.id.content)
         TextView content;
 
-        @InjectView(R.id.img_area)
-        LinearLayout layout;
 
         public Holder(View view) {
             ButterKnife.inject(this, view);

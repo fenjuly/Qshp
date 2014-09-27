@@ -36,6 +36,8 @@ public class ProfileActivity extends Activity{
     String shuidi;
     String cunzaigan;
     String bingjing;
+    String name;
+
     @InjectView(R.id.jifen_text)
     TextView jifen_text;
     @InjectView(R.id.weiwang_text)
@@ -46,6 +48,9 @@ public class ProfileActivity extends Activity{
     TextView cunzaigan_text;
     @InjectView(R.id.bingjign_text)
     TextView bingjing_text;
+    @InjectView(R.id.name)
+    TextView name_text;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +66,8 @@ public class ProfileActivity extends Activity{
                 Connection.Response response = Request.execute(String.format(Api.PROFILE, uid), Api.USER_AGENT, (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
                 try {
                     doc = response.parse();
-                    Log.e("doc", doc.text());
                     Elements user_boxs = doc.getElementsByClass("user_box");
-                    String author = Athority.getSharedPreference().getString("username", "");
+                    name = Athority.getSharedPreference().getString("username", "");
                     for (Element user_box : user_boxs) {
                         int i = 1;
                         for (Element span : user_box.getElementsByTag("span")) {
@@ -106,6 +110,7 @@ public class ProfileActivity extends Activity{
                 shuidi_text.setText(shuidi);
                 cunzaigan_text.setText(cunzaigan);
                 bingjing_text.setText(bingjing);
+                name_text.setText(name);
             }
         });
     }

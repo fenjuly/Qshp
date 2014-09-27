@@ -44,7 +44,6 @@ public class MyMessageActivity extends Activity {
                 Connection.Response response = Request.execute(Api.MY_MESSAGES, Api.USER_AGENT, (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
                 try {
                     doc = response.parse();
-                    Log.e("doc",doc.text());
                     Elements bm_cs = doc.getElementsByClass("bm_c");
                     String str_tid = "";
                     String title = "";

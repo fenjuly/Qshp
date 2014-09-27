@@ -30,7 +30,7 @@ public class Api {
 
     public static final String MY_COLLECTIONS = HOST + "home.php?mod=space&uid" + "%1$s" + "&do=favorite&view=me&type=thread&mobile=2";  //paramter: uid
 
-    public static final String MY_MESSAGES = HOST + "bbs.stuhome.net/home.php?mod=space&do=pm&mobile=1&filter=privatepm";
+    public static final String MY_MESSAGES = HOST + "home.php?mod=space&do=pm&mobile=1";
 
-    public static final String PROFILE = HOST + "http://bbs.stuhome.net/home.php?mod=space&uid=" + "%1$s" + "&do=profile&mobile=2";
+    public static final String PROFILE = HOST + "home.php?mod=space&uid=" + "%1$s" + "&do=profile&mobile=2";
 }
