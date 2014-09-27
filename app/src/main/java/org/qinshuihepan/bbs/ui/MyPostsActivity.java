@@ -34,7 +34,7 @@ public class MyPostsActivity extends Activity {
         super.onCreate(savedInstanceState);
         mContext = this;
         setContentView(R.layout.activity_myposts);
-        mListView = (ListView) findViewById(R.id.listView);
+        mListView = ( ListView) findViewById(R.id.listView);
         final String uid = Athority.getSharedPreference().getString("uid","");
         TaskUtils.executeAsyncTask(new AsyncTask<String, Void, ArrayList<BasePost>>() {
             @Override
