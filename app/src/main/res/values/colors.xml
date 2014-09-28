@@ -3,6 +3,7 @@
     <color name="custom_white">#FFE7EDE9</color>
     <color name="custom_blue">#FF6686B1</color>
     <color name="drawer_bg">#FFFFFFcc</color>
-    <color name="main_bg">#14439C</color>
+    <color name="main_bg">#00af64</color>
+    <color name="back_ground">#99CC99</color>
     <color name="login_bg">#3594F2</color>
 </resources>

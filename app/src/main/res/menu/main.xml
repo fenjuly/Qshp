@@ -1,24 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/myposts"
+        android:id="@+id/personalcenter"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="我的帖子"/>
-    <item
-        android:id="@+id/myrelpy"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="我的回复"/>
-    <item
-        android:id="@+id/setting"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="个性设置"/>
-    <item
-        android:id="@+id/profile"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="反馈意见"/>
+        android:title="个人中心"/>
     <item
         android:id="@+id/changeAcount"
         android:orderInCategory="100"

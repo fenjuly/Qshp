@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import org.qinshuihepan.bbs.R;
+import org.qinshuihepan.bbs.ui.LeaveMessageActivity;
 import org.qinshuihepan.bbs.ui.MyCollectionActivity;
 import org.qinshuihepan.bbs.ui.MyMessageActivity;
 import org.qinshuihepan.bbs.ui.MyPostsActivity;
@@ -71,6 +72,9 @@ public class PersonalCenterAdapter extends BaseAdapter {
                         break;
                     case 2 :
                         mContext.startActivity(new Intent(mContext, MyCollectionActivity.class));
+                        break;
+                    case 3 :
+                        mContext.startActivity(new Intent(mContext, LeaveMessageActivity.class));
                         break;
                     case 4 :
                         mContext.startActivity(new Intent(mContext, ProfileActivity.class));

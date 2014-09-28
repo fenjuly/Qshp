@@ -102,7 +102,7 @@ public class MainActivity extends FragmentActivity {
             case R.id.changeAcount:
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();                return true;
-            case R.id.myposts:
+            case R.id.personalcenter:
                 startActivity(new Intent(this, PersonalCenterActivity.class));
                 return true;
             default:
