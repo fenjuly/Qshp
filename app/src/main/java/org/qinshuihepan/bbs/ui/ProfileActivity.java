@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -18,7 +17,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.jsoup.Connection;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -29,7 +27,6 @@ import org.qinshuihepan.bbs.model.BasePost;
 import org.qinshuihepan.bbs.util.TaskUtils;
 import org.qinshuihepan.bbs.util.sharedpreference.Athority;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -69,7 +66,6 @@ public class ProfileActivity extends Activity {
     ImageView avatar;
 
     Bitmap bitmap;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +120,7 @@ public class ProfileActivity extends Activity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-               url = "http://bbs.stuhome.net/uc_server/data/avatar/000/" + uid.substring(0, 2) + "/" + uid.substring(2, 4) + "/" + uid.substring(4) + "_avatar_small.jpg";
+                url = "http://bbs.stuhome.net/uc_server/data/avatar/000/" + uid.substring(0, 2) + "/" + uid.substring(2, 4) + "/" + uid.substring(4) + "_avatar_small.jpg";
                 Log.e("url", url);
                 bitmap = getBitmap(url);
                 return posts;
@@ -174,6 +170,7 @@ public class ProfileActivity extends Activity {
         return bitmap;
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

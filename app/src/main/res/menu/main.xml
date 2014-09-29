@@ -8,16 +8,17 @@
         android:id="@+id/changeAcount"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="切换帐号"/>
+        android:title="切换帐号" />
     />
     <item
         android:id="@+id/search"
+        android:icon="@android:drawable/ic_menu_search"
         android:showAsAction="always"
         android:title="搜索帖子"
-        android:actionViewClass="android.widget.SearchView"/>
+        android:actionViewClass="android.widget.SearchView" />
     <item
         android:id="@+id/new_post"
         android:icon="@drawable/u13"
         android:showAsAction="always"
-        android:title="发表帖子"/>
+        android:title="发表帖子" />
 </menu>

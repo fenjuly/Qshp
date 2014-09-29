@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.nhaarman.listviewanimations.swinginadapters.AnimationAdapter;
 
@@ -97,7 +96,6 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
             @Override
             public void onLoadNext() {
                 if (mPage >= maxPage) {
-                    Toast.makeText(getActivity(), "已经滑到底啦！", Toast.LENGTH_SHORT).show();
                     mListView.setState(LoadingFooter.State.TheEnd);
                 } else {
                     loadNext();
