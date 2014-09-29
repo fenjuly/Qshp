@@ -1,38 +1,34 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/myposts"
+        android:id="@+id/usercenter"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="我的帖子"/>
-    <item
-        android:id="@+id/myrelpy"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="我的回复"/>
+        android:title="个人中心" />
     <item
         android:id="@+id/setting"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="个性设置"/>
+        android:title="个性设置" />
     <item
         android:id="@+id/profile"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="反馈意见"/>
+        android:title="反馈意见" />
     <item
         android:id="@+id/changeAcount"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="切换帐号"/>
+        android:title="切换帐号" />
     />
     <item
         android:id="@+id/search"
+        android:icon="@android:drawable/ic_menu_search"
         android:showAsAction="always"
         android:title="搜索帖子"
-        android:actionViewClass="android.widget.SearchView"/>
+        android:actionViewClass="android.widget.SearchView" />
     <item
         android:id="@+id/new_post"
         android:icon="@drawable/u13"
         android:showAsAction="always"
-        android:title="发表帖子"/>
+        android:title="发表帖子" />
 </menu>
