@@ -17,7 +17,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="fenjuly"
         android:id="@+id/name"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
@@ -56,7 +55,6 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
                 android:paddingTop="8dp"
-                android:text="165"
 
                 />
 
@@ -96,7 +94,6 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
                 android:paddingTop="8dp"
-                android:text="1点"
 
                 />
 
@@ -134,7 +131,6 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
                 android:paddingTop="8dp"
-                android:text="720滴"
 
                 />
 
@@ -171,7 +167,6 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
                 android:paddingTop="8dp"
-                android:text="0"
 
                 />
 
@@ -208,7 +203,6 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
                 android:paddingTop="8dp"
-                android:text="0块"
 
                 />
 

@@ -24,6 +24,7 @@ import org.qinshuihepan.bbs.R;
 import org.qinshuihepan.bbs.ui.fragment.DrawerFragment;
 import org.qinshuihepan.bbs.ui.fragment.PostsFragment;
 import org.qinshuihepan.bbs.util.Utils;
+import org.qinshuihepan.bbs.util.sharedpreference.Athority;
 import org.qinshuihepan.bbs.util.update.NetChecker;
 import org.qinshuihepan.bbs.util.update.UpdateChecker;
 import org.qinshuihepan.bbs.view.FoldingDrawerLayout;
@@ -100,6 +101,7 @@ public class MainActivity extends FragmentActivity {
         }
         switch (item.getItemId()) {
             case R.id.changeAcount:
+                Athority.addOther(Athority.HAVE_UID, "no");
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();                return true;
             case R.id.personalcenter:
