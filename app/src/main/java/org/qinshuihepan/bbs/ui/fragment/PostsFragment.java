@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -167,6 +168,7 @@ public class PostsFragment extends Fragment implements LoaderManager.LoaderCallb
                                 break;
                             }
                             Athority.addOther(Athority.HAVE_UID, "yes");
+                            Athority.addCookies(user_info);
                         }
                         switch (tempCategoryID) {
                             case 10002:

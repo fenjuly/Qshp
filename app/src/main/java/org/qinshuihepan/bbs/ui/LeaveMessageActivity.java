@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import org.jsoup.Connection;
@@ -34,6 +35,7 @@ public class LeaveMessageActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_message_conversation);
         mContext = this;
         mListView = (ListView) findViewById(R.id.listView);
@@ -92,5 +94,16 @@ public class LeaveMessageActivity extends Activity {
                 mListView.setAdapter(leaveMessageAdapter);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

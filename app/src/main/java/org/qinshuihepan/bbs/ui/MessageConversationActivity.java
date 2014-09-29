@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import org.jsoup.Connection;
@@ -36,6 +37,7 @@ public class MessageConversationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_conversation);
         mContext = this;
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         mListView = (ListView) findViewById(R.id.listView);
         final int touid = getIntent().getIntExtra("touid", 0);
         TaskUtils.executeAsyncTask(new AsyncTask<String, Void, ArrayList<BasePost>>() {
@@ -80,5 +82,16 @@ public class MessageConversationActivity extends Activity {
                 mListView.setAdapter(messageConversationAdapter);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

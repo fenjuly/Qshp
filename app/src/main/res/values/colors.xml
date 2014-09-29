@@ -2,8 +2,14 @@
 <resources>
     <color name="custom_white">#FFE7EDE9</color>
     <color name="custom_blue">#FF6686B1</color>
-    <color name="drawer_bg">#FFFFFFcc</color>
+    <color name="drawer_bg">#ffffff</color>
     <color name="main_bg">#00af64</color>
     <color name="back_ground">#99CC99</color>
     <color name="login_bg">#3594F2</color>
+
+    <color name="un_pressed">#CCCCCC</color>
+    <color name="pressed">#999999</color>
+
+    <color name="backgroundColor">#E8E8E0</color>
+    <color name="backgroundColorPress">#DBDBD3</color>
 </resources>
