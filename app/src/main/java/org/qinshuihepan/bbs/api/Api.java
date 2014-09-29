@@ -21,6 +21,8 @@ public class Api {
 
     public static final String REPLY_SINGLE = HOST + "forum.php?mod=post&infloat=yes&action=reply&fid=" + "%1$s" + "&extra=page&tid=" + "%2$s" + "&replysubmit=yes&inajax=1";
 
+    public static final String LEAVE_MESSAGE = HOST + "home.php?mod=space&uid=" + "%1$s" + "&do=wall";
+
     //Mobile API
     public static final String MOBILE_COOKIE_LOGIN = HOST + "member.php?mod=logging&action=login&mobile=1";
 
@@ -30,5 +32,9 @@ public class Api {
 
     public static final String MY_COLLECTIONS = HOST + "home.php?mod=space&uid" + "%1$s" + "&do=favorite&view=me&type=thread&mobile=2";  //paramter: uid
 
-    public static final String MY_MESSAGES = HOST + "bbs.stuhome.net/home.php?mod=space&do=pm&mobile=1&filter=privatepm";
+    public static final String MY_MESSAGES = HOST + "home.php?mod=space&do=pm&mobile=1";
+
+    public static final String MESSAGE_CONTENT = HOST + "home.php?mod=space&do=pm&subop=view&touid=" + "%1$s" +"&mobile=1";
+
+    public static final String PROFILE = HOST + "home.php?mod=space&uid=" + "%1$s" + "&do=profile&mobile=2";
 }

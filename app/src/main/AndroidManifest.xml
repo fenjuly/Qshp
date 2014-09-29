@@ -33,12 +33,14 @@
                 android:name="android.app.default_searchable"
                 android:value="org.qinshuihepan.bbs.ui.SearchActivity"/>
         </activity>
-        <activity android:name="org.qinshuihepan.bbs.ui.PostContentActivity"/>
-        <activity android:name="org.qinshuihepan.bbs.ui.ImageViewActivity"/>
+        <activity android:name="ui.PostContentActivity"/>
+        <activity android:name="ui.ImageViewActivity"/>
         <activity android:name=".ui.MyPostsActivity"/>
         <activity android:name=".ui.MyCollectionActivity"/>
         <activity android:name=".ui.MyMessageActivity"/>
         <activity android:name=".ui.ProfileActivity"/>
+        <activity android:name=".ui.MessageConversationActivity"/>
+        <activity android:name=".ui.LeaveMessageActivity"/>
         <activity
             android:name="org.qinshuihepan.bbs.ui.LoginActivity"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar"

@@ -101,9 +101,8 @@ public class MainActivity extends FragmentActivity {
         switch (item.getItemId()) {
             case R.id.changeAcount:
                 startActivity(new Intent(this, LoginActivity.class));
-                finish();
-                return true;
-            case R.id.usercenter:
+                finish();                return true;
+            case R.id.personalcenter:
                 startActivity(new Intent(this, PersonalCenterActivity.class));
                 return true;
             default:

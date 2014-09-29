@@ -1,33 +1,29 @@
 package org.qinshuihepan.bbs.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.qinshuihepan.bbs.R;
 import org.qinshuihepan.bbs.model.BasePost;
-import org.qinshuihepan.bbs.ui.MessageConversationActivity;
 
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-
 /**
- * Created by liurongchan on 14-9-23.
+ * Created by liurongchan on 14-9-28.
  */
-public class MessageContentAdapter extends BaseAdapter {
+public class LeaveMessageAdapter extends BaseAdapter {
 
     List<BasePost> posts;
     Context mContext;
 
-    public MessageContentAdapter(Context context, List<BasePost> posts) {
+    public LeaveMessageAdapter(Context context, List<BasePost> posts) {
         this.mContext = context;
         this.posts = posts;
     }
@@ -60,14 +56,6 @@ public class MessageContentAdapter extends BaseAdapter {
         holder.author.setText(posts.get(position).author);
         holder.content.setText(posts.get(position).title);
         holder.time.setText(posts.get(position).time);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, MessageConversationActivity.class);
-                intent.putExtra("touid", posts.get(position).tid);
-                mContext.startActivity(intent);
-            }
-        });
         return view;
     }
 

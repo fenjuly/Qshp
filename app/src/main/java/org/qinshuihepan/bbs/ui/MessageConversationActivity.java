@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ListView;
 
@@ -17,7 +16,7 @@ import org.qinshuihepan.bbs.api.Api;
 import org.qinshuihepan.bbs.data.Request;
 import org.qinshuihepan.bbs.model.BasePost;
 import org.qinshuihepan.bbs.model.Post;
-import org.qinshuihepan.bbs.ui.adapter.MyPostsAdapter;
+import org.qinshuihepan.bbs.ui.adapter.MessageConversationAdapter;
 import org.qinshuihepan.bbs.util.TaskUtils;
 import org.qinshuihepan.bbs.util.sharedpreference.Athority;
 
@@ -26,29 +25,30 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * Created by liurongchan on 14-9-23.
+ * Created by liurongchan on 14-9-28.
  */
-public class MyCollectionActivity extends Activity {
+public class MessageConversationActivity extends Activity {
 
-    ListView mListView;
     Context mContext;
+    ListView mListView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_message_conversation);
         mContext = this;
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        setContentView(R.layout.activity_myposts);
         mListView = (ListView) findViewById(R.id.listView);
-        final String uid = Athority.getSharedPreference().getString("uid","");
+        final int touid = getIntent().getIntExtra("touid", 0);
         TaskUtils.executeAsyncTask(new AsyncTask<String, Void, ArrayList<BasePost>>() {
             @Override
             protected ArrayList<BasePost> doInBackground(String... params) {
                 ArrayList<BasePost> posts = new ArrayList<BasePost>();
                 Document doc = null;
-                Connection.Response response = Request.execute(String.format(Api.MY_COLLECTIONS, uid), Api.USER_AGENT, (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
+                Connection.Response response = Request.execute(String.format(Api.MESSAGE_CONTENT, touid), Api.USER_AGENT, (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
                 try {
                     doc = response.parse();
-                    Elements threadlists = doc.getElementsByClass("threadlist");
+                    Elements bm_cs = doc.getElementsByClass("bm_c");
                     String str_tid = "";
                     String title = "";
                     String time = "";
@@ -57,18 +57,14 @@ public class MyCollectionActivity extends Activity {
                     int tid = 0;
                     String author = "";
                     BasePost post;
-                    for (Element threadlist : threadlists) {
-                        Elements as = threadlist.getElementsByTag("a");
-                        for (Element a : as) {
-                            String start = "forum.php?mod=viewthread  tid=";
-                            String len = "  mobile=1";
-                            String url = a.attr("href");
-                            str_tid = url.substring(start.length() - 1, url.length() - len.length() + 1);
-                            tid = Integer.valueOf(str_tid);
-                            title = a.text();
-                            post = new Post(0, tid, 0, title, "", time, haveimg, 0, author, null);
-                            posts.add(post);
-                        }
+                    for (Element bm_c : bm_cs) {
+                        Elements as = bm_c.getElementsByClass("xi2");
+                        Elements spans = bm_c.getElementsByClass("xg1");
+                        author = as.text();
+                        time = spans.text();
+                        title = bm_c.getElementsByClass("xs1").text();
+                        post = new Post(0, tid, 0, title, "", time, haveimg, 0, author, null);
+                        posts.add(post);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -79,8 +75,11 @@ public class MyCollectionActivity extends Activity {
             @Override
             protected void onPostExecute(ArrayList<BasePost> posts) {
                 super.onPostExecute(posts);
-                MyPostsAdapter myPostsAdapter = new MyPostsAdapter(mContext, posts, mListView);
-                mListView.setAdapter(myPostsAdapter);
+                if (posts.size() >= 1) {
+                    posts.remove(posts.size() - 1);
+                }
+                MessageConversationAdapter messageConversationAdapter = new MessageConversationAdapter(mContext, posts);
+                mListView.setAdapter(messageConversationAdapter);
             }
         });
     }
@@ -95,5 +94,4 @@ public class MyCollectionActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

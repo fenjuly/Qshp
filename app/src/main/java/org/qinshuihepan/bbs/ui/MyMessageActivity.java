@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import org.jsoup.Connection;
@@ -34,6 +35,7 @@ public class MyMessageActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_myposts);
         mListView = (ListView) findViewById(R.id.listView);
         TaskUtils.executeAsyncTask(new AsyncTask<String, Void, ArrayList<BasePost>>() {
@@ -44,7 +46,6 @@ public class MyMessageActivity extends Activity {
                 Connection.Response response = Request.execute(Api.MY_MESSAGES, Api.USER_AGENT, (Map<String, String>) Athority.getSharedPreference().getAll(), Connection.Method.GET);
                 try {
                     doc = response.parse();
-                    Log.e("doc",doc.text());
                     Elements bm_cs = doc.getElementsByClass("bm_c");
                     String str_tid = "";
                     String title = "";
@@ -90,5 +91,16 @@ public class MyMessageActivity extends Activity {
                 mListView.setAdapter(messageContentAdapter);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

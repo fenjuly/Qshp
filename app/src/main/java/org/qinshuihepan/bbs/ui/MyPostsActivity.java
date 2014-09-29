@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import org.jsoup.Connection;
@@ -33,8 +34,9 @@ public class MyPostsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_myposts);
-        mListView = (ListView) findViewById(R.id.listView);
+        mListView = ( ListView) findViewById(R.id.listView);
         final String uid = Athority.getSharedPreference().getString("uid","");
         TaskUtils.executeAsyncTask(new AsyncTask<String, Void, ArrayList<BasePost>>() {
             @Override
@@ -81,6 +83,17 @@ public class MyPostsActivity extends Activity {
                 mListView.setAdapter(myPostsAdapter);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

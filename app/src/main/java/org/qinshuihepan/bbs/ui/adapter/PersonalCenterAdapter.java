@@ -1,5 +1,6 @@
 package org.qinshuihepan.bbs.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import org.qinshuihepan.bbs.R;
+import org.qinshuihepan.bbs.ui.LeaveMessageActivity;
 import org.qinshuihepan.bbs.ui.MyCollectionActivity;
 import org.qinshuihepan.bbs.ui.MyMessageActivity;
 import org.qinshuihepan.bbs.ui.MyPostsActivity;
@@ -65,15 +67,23 @@ public class PersonalCenterAdapter extends BaseAdapter {
                 switch (position) {
                     case 0 :
                         mContext.startActivity(new Intent(mContext, MyPostsActivity.class));
+                        ((Activity) mContext).overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                         break;
                     case 1 :
                         mContext.startActivity(new Intent(mContext, MyMessageActivity.class));
+                        ((Activity) mContext).overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                         break;
                     case 2 :
                         mContext.startActivity(new Intent(mContext, MyCollectionActivity.class));
+                        ((Activity) mContext).overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+                        break;
+                    case 3 :
+                        mContext.startActivity(new Intent(mContext, LeaveMessageActivity.class));
+                        ((Activity) mContext).overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                         break;
                     case 4 :
                         mContext.startActivity(new Intent(mContext, ProfileActivity.class));
+                        ((Activity) mContext).overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                         break;
                     default:
                         break;
