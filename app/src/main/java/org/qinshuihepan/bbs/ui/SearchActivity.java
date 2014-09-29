@@ -85,9 +85,13 @@ public class SearchActivity extends Activity {
                     for (Element href : threadlist) {
                         title = href.text();
                         String url = href.toString();
-                        tid = Integer.valueOf(url.substring(url.indexOf("tid=") + 4, url.indexOf("&amp;highlight")));
-                        post = new Post(0, tid, 0, title, "", "", 0, 0, "", null);
-                        posts.add(post);
+                        if(url.indexOf("tid=") + 4 > url.indexOf("&amp;highlight")) {
+
+                        } else  {
+                            tid = Integer.valueOf(url.substring(url.indexOf("tid=") + 4, url.indexOf("&amp;highlight")));
+                            post = new Post(0, tid, 0, title, "", "", 0, 0, "", null);
+                            posts.add(post);
+                        }
                     }
                     searchResultsAdapter = new MyPostsAdapter(SearchActivity.this, posts, searchListView);
                 } catch (IOException e) {
