@@ -3,6 +3,7 @@ package org.qinshuihepan.bbs.model;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,6 +14,8 @@ import com.squareup.picasso.Picasso;
 import org.qinshuihepan.bbs.R;
 import org.qinshuihepan.bbs.api.Api;
 import org.qinshuihepan.bbs.ui.ImageViewActivity;
+import org.qinshuihepan.bbs.util.Utils;
+import org.qinshuihepan.bbs.util.sharedpreference.Athority;
 
 import java.util.ArrayList;
 
@@ -60,6 +63,11 @@ public class PostWithPic extends BasePost implements ListItem {
         holder.content.setText(post.content);
         holder.time.setText(post.time);
         holder.author.setText(post.author);
+        if (cursor.getPosition() == 0 ) {
+            holder.title.setText(post.title);
+        } else {
+            holder.title.setText("");
+        }
 
     }
 

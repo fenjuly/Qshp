@@ -40,6 +40,7 @@ import org.qinshuihepan.bbs.ui.adapter.PostContentAdapter;
 import org.qinshuihepan.bbs.util.ActionBarUtils;
 import org.qinshuihepan.bbs.util.ListViewUtils;
 import org.qinshuihepan.bbs.util.TaskUtils;
+import org.qinshuihepan.bbs.util.Utils;
 import org.qinshuihepan.bbs.util.sharedpreference.Athority;
 import org.qinshuihepan.bbs.view.LoadingFooter;
 import org.qinshuihepan.bbs.view.PageListView;
@@ -57,6 +58,7 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
 
     public static final String TID = "tid";
     public static final String FID = "fid";
+    public static final String TITLE = "title";
 
     SwipeRefreshLayout mSwipeLayout;
 
@@ -66,6 +68,7 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
     String url = "";
     private int tid;
     private int fid;
+    private String title;
     private ItemsDataHelper mtDataHelper;
     private ImagesDataHelper miDataHelper;
     private PostContentAdapter mAdapter;
@@ -81,8 +84,10 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         setTitle(R.string.view_post);
+        Utils.HAS_SET_TITLE = false;
         tid = getIntent().getExtras().getInt(TID);
         fid = getIntent().getExtras().getInt(FID);
+        title = getIntent().getExtras().getString(TITLE);
         setContentView(R.layout.post_layout);
         mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         mListView = (PageListView) findViewById(R.id.listView);
@@ -269,10 +274,10 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
                             }
                         }
                         if (images.size() == 0) {
-                            posts.add(new Post(fid, tid, pid, "",
+                            posts.add(new Post(fid, tid, pid, title,
                                     content, time, 0, 0, author, null));
                         } else {
-                            posts.add(new PostWithPic(fid, tid, pid, "",
+                            posts.add(new PostWithPic(fid, tid, pid, title,
                                     content, time, 1, 0, author, null));
                             miDataHelper.bulkInsert(images);
                         }

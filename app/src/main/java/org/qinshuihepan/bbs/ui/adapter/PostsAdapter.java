@@ -15,6 +15,7 @@ import android.widget.TextView;
 import org.qinshuihepan.bbs.R;
 import org.qinshuihepan.bbs.model.BasePost;
 import org.qinshuihepan.bbs.ui.PostContentActivity;
+import org.qinshuihepan.bbs.util.sharedpreference.Athority;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -66,6 +67,7 @@ public class PostsAdapter extends CursorAdapter {
                 Intent intent = new Intent(mContext, PostContentActivity.class);
                 intent.putExtra(PostContentActivity.FID, post.fid);
                 intent.putExtra(PostContentActivity.TID, post.tid);
+                intent.putExtra(PostContentActivity.TITLE, post.title);
                 mContext.startActivity(intent);
             }
         });

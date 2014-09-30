@@ -34,6 +34,7 @@ public class BasePost {
     public static final String ITEM = "item";
 
     private static ImagesDataHelper miDataHelper = new ImagesDataHelper(App.getContext());
+
     public int fid;
     public int tid;
     public int pid;
@@ -116,7 +117,6 @@ public class BasePost {
             String content = cursor.getString(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.CONTENT));
             String time = cursor.getString(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.TIME));
             int haveimg = cursor.getInt(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.HAVEIMG));
-            System.out.println(haveimg);
             int comment_count = cursor.getInt(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.COMMENT_COUNT));
             String author = cursor.getString(cursor.getColumnIndex(ItemsDataHelper.ItemsDBInfo.AUTHOR));
 
@@ -158,6 +158,9 @@ public class BasePost {
 
         @InjectView(R.id.time)
         TextView time;
+
+        @InjectView(R.id.title)
+        TextView title;
 
         @InjectView(R.id.content)
         TextView content;
