@@ -84,7 +84,6 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         setTitle(R.string.view_post);
-        Utils.HAS_SET_TITLE = false;
         tid = getIntent().getExtras().getInt(TID);
         fid = getIntent().getExtras().getInt(FID);
         title = getIntent().getExtras().getString(TITLE);
