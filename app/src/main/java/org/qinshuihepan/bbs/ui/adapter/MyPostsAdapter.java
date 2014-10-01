@@ -42,6 +42,11 @@ public class MyPostsAdapter extends BaseAdapter{
         return posts.size();
     }
 
+    public void refresh(ArrayList<BasePost> mPosts) {
+        this.posts = mPosts;
+        notifyDataSetChanged();
+    }
+
     @Override
     public BasePost getItem(int position) {
         return posts.get(position);
