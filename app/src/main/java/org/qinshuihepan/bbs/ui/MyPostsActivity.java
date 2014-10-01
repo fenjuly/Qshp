@@ -33,6 +33,7 @@ public class MyPostsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("我的帖子");
         mContext = this;
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_myposts);

@@ -35,6 +35,7 @@ public class LeaveMessageActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("我的留言");
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_message_conversation);
         mContext = this;

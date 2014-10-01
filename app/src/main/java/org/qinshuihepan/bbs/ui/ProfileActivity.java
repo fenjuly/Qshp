@@ -71,6 +71,7 @@ public class ProfileActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
+        setTitle("我的资料");
         getActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.inject(this);
         final String uid = Athority.getSharedPreference().getString("uid", "");

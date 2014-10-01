@@ -34,6 +34,7 @@ public class MyMessageActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("我的消息");
         mContext = this;
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_myposts);

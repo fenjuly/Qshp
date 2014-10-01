@@ -35,6 +35,7 @@ public class MessageConversationActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("我的会话");
         setContentView(R.layout.activity_message_conversation);
         mContext = this;
         getActionBar().setDisplayHomeAsUpEnabled(true);

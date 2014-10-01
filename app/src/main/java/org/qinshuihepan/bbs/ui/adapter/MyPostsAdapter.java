@@ -76,6 +76,7 @@ public class MyPostsAdapter extends BaseAdapter{
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, PostContentActivity.class);
                 intent.putExtra(PostContentActivity.TID, posts.get(position).tid);
+                intent.putExtra(PostContentActivity.TITLE, posts.get(position).title);
                 mContext.startActivity(intent);
             }
         });

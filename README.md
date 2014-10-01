@@ -29,6 +29,9 @@ Qshp
 * [Picasso](https://github.com/square/picasso) A powerful image downloading and caching library for Android.
 
 * [circular-progress-button](https://github.com/dmytrodanylyk/circular-progress-button) Android Button which can morph to Circular Progress.
+
+* [FadingActionBar](https://github.com/ManuelPeinado/FadingActionBar) Android library implementing a fading effect for the action bar, similar to the one found in the Play Music app
+
 ##Thanks
 - [stormzhang](https://github.com/stormzhang/9GAG)，参考了他的代码结构等。
 

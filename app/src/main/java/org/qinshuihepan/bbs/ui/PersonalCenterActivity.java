@@ -19,6 +19,7 @@ public class PersonalCenterActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("个人中心");
         setTheme(R.style.AppTheme2);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         FadingActionBarHelper helper = new FadingActionBarHelper()

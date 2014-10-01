@@ -35,6 +35,7 @@ public class MyCollectionActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("我的收藏");
         mContext = this;
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_myposts);
