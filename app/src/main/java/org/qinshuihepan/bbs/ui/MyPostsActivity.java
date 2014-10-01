@@ -139,7 +139,11 @@ public class MyPostsActivity extends Activity {
                             title = a.text();
                         }
                         Elements xg1s = bm_c.getElementsByClass("xg1");
-                        comment_count = xg1s.text().substring("回".length());
+                        if(xg1s.text().length() != 0) {
+                            comment_count = xg1s.text().substring("回".length());
+                        } else {
+                            comment_count = "0";
+                        }
                         post = new Post(0, tid, 0, title, "", time, haveimg, Integer.valueOf(comment_count), author, null);
                         posts.add(post);
                     }
@@ -152,6 +156,9 @@ public class MyPostsActivity extends Activity {
             @Override
             protected void onPostExecute(ArrayList<BasePost> posts) {
                 super.onPostExecute(posts);
+                if(posts.size() == 1) {
+                    posts.clear();
+                }
                 myPostsAdapter = new MyPostsAdapter(mContext, posts, mListView);
                 mListView.setAdapter(myPostsAdapter);
             }
