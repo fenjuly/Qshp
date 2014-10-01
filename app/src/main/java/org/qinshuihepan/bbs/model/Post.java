@@ -2,6 +2,8 @@ package org.qinshuihepan.bbs.model;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.text.Layout;
 import android.util.Log;
 import android.view.View;
@@ -28,13 +30,17 @@ public class Post extends BasePost implements ListItem {
         BasePost post = BasePost.fromCursor(cursor, ITEM);
 
         holder.author.setText(post.author);
-        holder.content.setText(post.content);
         holder.time.setText(post.time);
+        String[] temp  = post.content.split("%%%%%");
         if (cursor.getPosition() == 0 ) {
             holder.title.setText(post.title);
+            holder.title.setTextColor(Color.BLACK);
         } else {
-            holder.title.setText("");
+            holder.title.setText(temp[0]);
+            holder.title.setTextColor(Color.LTGRAY);
+            holder.title.setTextSize(12);
         }
+        holder.content.setText(temp[1]);
     }
 
     @Override

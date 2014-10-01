@@ -3,6 +3,7 @@ package org.qinshuihepan.bbs.model;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -56,14 +57,18 @@ public class PostWithPic extends BasePost implements ListItem {
             });
         }
 
-        holder.content.setText(post.content);
         holder.time.setText(post.time);
         holder.author.setText(post.author);
+        String[] temp  = post.content.split("%%%%%");
         if (cursor.getPosition() == 0 ) {
             holder.title.setText(post.title);
+            holder.title.setTextColor(Color.BLACK);
         } else {
-            holder.title.setText("");
+            holder.title.setText(temp[0]);
+            holder.title.setTextColor(Color.LTGRAY);
+            holder.title.setTextSize(12);
         }
+        holder.content.setText(temp[1]);
 
     }
 

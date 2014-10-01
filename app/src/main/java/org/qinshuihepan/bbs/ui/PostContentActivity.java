@@ -232,6 +232,7 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
                     String time;
                     String content;
                     String author;
+                    String temp = "";
 
                     if (isRefreshFromTop) {
                         mtDataHelper.deleteAll();
@@ -255,7 +256,13 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
                         Elements xw1s = plhin.getElementsByClass("xw1");
                         author = xw1s.text();
                         Elements t_fs = plhin.getElementsByClass("t_f");
+                        for (Element t_f : t_fs) {
+                            temp = t_f.getElementsByTag("blockquote").text();
+                            break;
+                        }
                         content = t_fs.text();
+                        content = content.substring(temp.length());
+                        content = temp + "%%%%%" + content;
                         time = plhin.getElementById("authorposton" + pid).text();
                         Elements e_pics = plhin.getElementsByClass("zoom");
                         images.clear();
