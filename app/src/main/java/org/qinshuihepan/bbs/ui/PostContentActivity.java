@@ -466,6 +466,8 @@ public class PostContentActivity extends FragmentActivity implements LoaderManag
             String content = "";
             if (posts.get(Integer.valueOf(params[2]) - 1).content.startsWith("%%%%%")) {
                 content = posts.get(Integer.valueOf(params[2]) - 1).content.substring("%%%%%".length());
+            } else {
+                content = posts.get(Integer.valueOf(params[2]) - 1).content;
             }
             noticetrimstr = "[quote][size=2][url=forum.php?mod=redirect&goto=findpost&pid="
                     + posts.get(Integer.valueOf(params[2]) - 1).pid
