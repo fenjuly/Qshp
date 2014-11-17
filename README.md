@@ -1,6 +1,11 @@
 Qshp
 ====
 
+Notice
+---
+由于官方的app已经出来了，我这个项目就没有了再次开发下去的意义。
+所以，这次是真的停止开发了。然后，我不会删除这个repo，毕竟是劳动成果，当作一次纪念。
+
 ![](http://i.imgur.com/rvojnn5.png) ![](http://i.imgur.com/rIttc8M.png)
 
 
